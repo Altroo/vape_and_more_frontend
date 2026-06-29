@@ -100,7 +100,14 @@ const getStoredLanguage = (fallback: LanguageCode) => {
 const localized = <T,>(values: Partial<Record<LanguageCode, T>> | undefined, language: LanguageCode, fallback: T): T =>
 	values?.[language] ?? values?.fr ?? fallback;
 
-const imageSrc = (source: string | undefined, fallback = '/assets/logo-vm.png') => source || fallback;
+const imagePathAliases: Record<string, string> = {
+	'/assets/promos/DUO PACK + DRINK.png': '/assets/promos/duo_pack_drink.png',
+};
+
+const imageSrc = (source: string | undefined, fallback = '/assets/logo-vm.png') => {
+	if (!source) return fallback;
+	return imagePathAliases[source] ?? source;
+};
 
 const waHref = (phone: string, message: string) => `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
 
