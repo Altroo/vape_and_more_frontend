@@ -1,8 +1,8 @@
 'use client';
 
-import { type FormEvent, useEffect, useMemo, useState } from 'react';
+import { type FormEvent, useEffect, useState } from 'react';
 import { languages, translations, type LanguageCode } from '@/data/translations';
-import type { Brand, Product, PromotionPack, Shop, SiteContent } from '@/utils/siteApi';
+import type { Brand, PromotionPack, Shop, SiteContent } from '@/utils/siteApi';
 
 type VapeSiteProps = {
 	siteContent: SiteContent;
@@ -106,11 +106,12 @@ const waHref = (phone: string, message: string) => `https://wa.me/${phone}?text=
 
 const homeAnchor = (id: string, catalogOnly?: boolean) => (catalogOnly ? `/#${id}` : `#${id}`);
 
-const brandListFromProducts = (products: Product[]) => {
-	const brands = new Map<string, string>();
-	products.forEach((product) => brands.set(product.brand_key, product.brand));
-	return Array.from(brands.entries()).map(([key, label]) => ({ key, label }));
-};
+const catalogueSheets = [
+	{ key: 'af-1', title: 'Catalogue Al Fakher 1', image: '/catalogue_images/1 AF.png', fileName: 'catalogue-al-fakher-1.png' },
+	{ key: 'af-2', title: 'Catalogue Al Fakher 2', image: '/catalogue_images/2 AF.png', fileName: 'catalogue-al-fakher-2.png' },
+	{ key: 'nerd-1', title: 'Catalogue Nerd 1', image: '/catalogue_images/Nerd 1.png', fileName: 'catalogue-nerd-1.png' },
+	{ key: 'nerd-2', title: 'Catalogue Nerd 2', image: '/catalogue_images/Nerd 2.png', fileName: 'catalogue-nerd-2.png' },
+];
 
 const PhoneIcon = () => (
 	<svg aria-hidden="true" fill="currentColor" height="24" viewBox="0 0 24 24" width="24">
@@ -485,78 +486,30 @@ const PromotionPacks = ({
 	</section>
 );
 
-const ProductCatalog = ({
-	products,
-	language,
-	t,
-	phone,
-}: {
-	products: Product[];
-	language: LanguageCode;
-	t: TranslationTree;
-	phone: string;
-}) => {
-	const brands = useMemo(() => brandListFromProducts(products), [products]);
-	const [activeBrand, setActiveBrand] = useState('all');
-	const visibleProducts = activeBrand === 'all' ? products : products.filter((product) => product.brand_key === activeBrand);
-
-	return (
-		<main className="catalog-page-main">
-			<section className="catalog-section catalog-page-section reveal visible" id="catalogue">
-				<div className="section-kicker">{t.catalog.kicker}</div>
-				<h1>{t.catalog.title}</h1>
-				<p className="catalog-intro">{t.catalog.intro}</p>
-				<div className="catalog-toolbar" id="catalogFilters" aria-label="Filtres catalogue">
-					<button className={`catalog-filter${activeBrand === 'all' ? ' is-active' : ''}`} type="button" onClick={() => setActiveBrand('all')}>
-						{t.common.all}
-					</button>
-					{brands.map((brand) => (
-						<button
-							className={`catalog-filter${activeBrand === brand.key ? ' is-active' : ''}`}
-							type="button"
-							key={brand.key}
-							onClick={() => setActiveBrand(brand.key)}
-						>
-							{brand.label}
-						</button>
-					))}
-				</div>
-				<div className="catalog-grid" id="catalogGrid" aria-live="polite">
-					{visibleProducts.map((product) => {
-						const copy = localized(product.texts, language, { name: product.key, description: '', flavors: [] });
-						const price = localized(product.price, language, '');
-						const message = t.common.whatsappProduct.replace('{product}', copy.name);
-						return (
-							<article className="catalog-card" key={product.key}>
-								<div className="catalog-image">
-									<img src={imageSrc(product.image)} alt={copy.name} loading="lazy" />
-								</div>
-								<div className="catalog-content">
-									<div className="product-brand">{product.brand}</div>
-									<h3>{copy.name}</h3>
-									<p>{copy.description}</p>
-									<div className="catalog-flavors">
-										<strong>{t.common.flavors}</strong>
-										<span>{copy.flavors.join(' / ')}</span>
-									</div>
-									<div className="catalog-bottom">
-										<div className="catalog-price">
-											<span>{t.common.price}</span>
-											<strong>{price}</strong>
-										</div>
-										<a className="btn-primary" href={waHref(phone, message)} target="_blank" rel="noopener">
-											{t.common.whatsappOrder}
-										</a>
-									</div>
-								</div>
-							</article>
-						);
-					})}
-				</div>
-			</section>
-		</main>
-	);
-};
+const CatalogueImages = ({ t }: { t: TranslationTree }) => (
+	<main className="catalog-page-main">
+		<section className="catalog-section catalog-page-section reveal visible" id="catalogue">
+			<div className="section-kicker">{t.catalog.kicker}</div>
+			<h1>{t.catalog.title}</h1>
+			<p className="catalog-intro">{t.catalog.intro}</p>
+			<div className="catalogue-image-grid" id="catalogGrid" aria-live="polite">
+				{catalogueSheets.map((sheet) => (
+					<article className="catalogue-image-card" key={sheet.key}>
+						<a className="catalogue-image-link" href={sheet.image} target="_blank" rel="noopener" aria-label={sheet.title}>
+							<img src={sheet.image} alt={sheet.title} loading="lazy" />
+						</a>
+						<div className="catalogue-image-actions">
+							<h2>{sheet.title}</h2>
+							<a className="btn-primary catalogue-download" href={sheet.image} download={sheet.fileName}>
+								{t.common.download}
+							</a>
+						</div>
+					</article>
+				))}
+			</div>
+		</section>
+	</main>
+);
 
 const Contact = ({ siteContent, t }: { siteContent: SiteContent; t: TranslationTree }) => (
 	<section className="social-section contact-section reveal visible" id="contact">
@@ -754,7 +707,7 @@ export const VapeSite = ({ siteContent, catalogOnly = false }: VapeSiteProps) =>
 				<Header language={language} t={t} catalogOnly={catalogOnly} onLanguageChange={setLanguage} />
 				<Marquee t={t} />
 				{catalogOnly ? (
-					<ProductCatalog products={siteContent.catalog} language={language} t={t} phone={siteContent.phone} />
+					<CatalogueImages t={t} />
 				) : (
 					<>
 						<Hero siteContent={siteContent} t={t} />

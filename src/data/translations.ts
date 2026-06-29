@@ -68,7 +68,7 @@ export const translations = {
 		catalog: {
 			kicker: 'Catalogue',
 			title: 'Catalogue produits',
-			intro: 'Tous les produits disponibles, classés par marque avec prix, saveurs et commande WhatsApp.',
+			intro: 'Consultez les catalogues actuels en image, en attendant l’intégration produit par produit avec visuels et informations détaillées.',
 		},
 		common: {
 			all: 'Toutes les marques',
@@ -77,6 +77,7 @@ export const translations = {
 			whatsappOrder: 'Commander sur WhatsApp',
 			whatsappProduct: 'Bonjour, je veux commander : {product}. Saveur souhaitée : ',
 			directions: 'Itinéraire sur Google Maps',
+			download: 'Télécharger l’image',
 			noContent: 'Le contenu sera disponible après publication dans l’administration.',
 		},
 		contact: {
@@ -149,7 +150,7 @@ export const translations = {
 		catalog: {
 			kicker: 'الكتالوغ',
 			title: 'كتالوغ المنتجات',
-			intro: 'كل المنتجات المتوفرة مصنفة حسب العلامة التجارية مع الأسعار والنكهات والطلب عبر واتساب.',
+			intro: 'اطلعوا على الكتالوغات الحالية كصور، في انتظار إدماج كل منتج لاحقا بصوره ومعلوماته المفصلة.',
 		},
 		common: {
 			all: 'جميع العلامات التجارية',
@@ -158,6 +159,7 @@ export const translations = {
 			whatsappOrder: 'اطلب عبر واتساب',
 			whatsappProduct: 'مرحبا، أريد طلب: {product}. النكهة المطلوبة: ',
 			directions: 'الاتجاهات عبر خرائط Google',
+			download: 'تحميل الصورة',
 			noContent: 'سيظهر المحتوى بعد نشره من لوحة الإدارة.',
 		},
 		contact: {
@@ -230,7 +232,7 @@ export const translations = {
 		catalog: {
 			kicker: 'Catalog',
 			title: 'Product catalog',
-			intro: 'All available products organized by brand with prices, flavors, and WhatsApp ordering.',
+			intro: 'Browse the current catalogue sheets as images while individual products, visuals, and detailed information are prepared.',
 		},
 		common: {
 			all: 'All brands',
@@ -239,6 +241,7 @@ export const translations = {
 			whatsappOrder: 'Order on WhatsApp',
 			whatsappProduct: 'Hello, I would like to order: {product}. Preferred flavor: ',
 			directions: 'Directions on Google Maps',
+			download: 'Download image',
 			noContent: 'Content will appear after it is published in the admin.',
 		},
 		contact: {
@@ -311,7 +314,7 @@ export const translations = {
 		catalog: {
 			kicker: 'Catálogo',
 			title: 'Catálogo de productos',
-			intro: 'Todos los productos disponibles organizados por marca con precios, sabores y pedido por WhatsApp.',
+			intro: 'Consulta los catálogos actuales como imágenes mientras se prepara la integración individual de productos, imágenes e información detallada.',
 		},
 		common: {
 			all: 'Todas las marcas',
@@ -320,6 +323,7 @@ export const translations = {
 			whatsappOrder: 'Pedir por WhatsApp',
 			whatsappProduct: 'Hola, quiero pedir: {product}. Sabor preferido: ',
 			directions: 'Indicaciones en Google Maps',
+			download: 'Descargar imagen',
 			noContent: 'El contenido aparecerá cuando se publique en la administración.',
 		},
 		contact: {
