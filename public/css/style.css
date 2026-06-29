@@ -1349,6 +1349,11 @@ body {
   letter-spacing: 0;
 }
 
+.phone-number {
+  direction: ltr;
+  unicode-bidi: isolate;
+}
+
 .footer-brand strong {
   font-size: 1.35rem;
   font-weight: 600;

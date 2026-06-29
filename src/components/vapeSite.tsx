@@ -569,7 +569,9 @@ const Contact = ({ siteContent, t }: { siteContent: SiteContent; t: TranslationT
 					<PhoneIcon />
 				</span>
 				<div className="social-name">{t.contact.phone}</div>
-				<div className="social-handle">07 64 37 51 56</div>
+				<div className="social-handle phone-number" dir="ltr">
+					07 64 37 51 56
+				</div>
 			</a>
 			<a className="social-card" href={`mailto:${siteContent.email}`}>
 				<span aria-hidden="true" className="social-logo">
@@ -672,7 +674,13 @@ const Footer = ({
 					<div className="footer-col">
 						<h4>{footer.contact}</h4>
 						<a href={`mailto:${siteContent.email}`}>{siteContent.email}</a>
-						<a href={waHref(siteContent.phone, 'Bonjour, je souhaite contacter Vape & More.')} target="_blank" rel="noopener">
+						<a
+							className="phone-number"
+							dir="ltr"
+							href={waHref(siteContent.phone, 'Bonjour, je souhaite contacter Vape & More.')}
+							target="_blank"
+							rel="noopener"
+						>
 							+212 764 37 51 56
 						</a>
 						<span>{footer.city}</span>
