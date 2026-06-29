@@ -1,4 +1,7 @@
-import { NextResponse, type NextRequest } from 'next/server';
-
-export const GET = (request: NextRequest) =>
-	NextResponse.redirect(new URL('/assets/logo-vm.png', request.url), 308);
+export const GET = () =>
+	new Response(null, {
+		status: 308,
+		headers: {
+			Location: '/assets/logo-vm.png',
+		},
+	});
