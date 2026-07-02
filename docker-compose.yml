@@ -11,6 +11,7 @@ services:
       - NODE_ENV=production
     extra_hosts:
       - "vape-and-more-api.elbouazzatiholding.ma:host-gateway"
+      - "api.vape-and-more.ma:host-gateway"
     ports:
       - "3007:3007"
     networks:
