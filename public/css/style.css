@@ -2297,29 +2297,36 @@ footer{
   text-shadow:0 0 18px rgba(0,255,208,.35);
 }
 
-.footer-instagram-link{
-  display:inline-flex !important;
+.footer-social-button{
+  width:3.35rem;
+  height:3.35rem;
+  display:inline-flex;
   align-items:center;
-  gap:.55rem;
-  width:fit-content;
+  justify-content:center;
+  color:#fff;
+  text-decoration:none;
+  border:1px solid rgba(255,255,255,.28);
+  border-radius:50%;
+  background:rgba(255,255,255,.015);
+  transition:border-color .25s ease,color .25s ease,transform .25s ease,box-shadow .25s ease;
 }
 
-.footer-instagram-link svg{
-  width:1.2rem;
-  height:1.2rem;
-  flex:0 0 auto;
+.footer-social-button svg{
+  width:1.45rem;
+  height:1.45rem;
+}
+
+.footer-social-button:hover,
+.footer-social-button:focus-visible{
   color:#00ffd0;
+  border-color:rgba(0,255,208,.65);
+  transform:translateY(-2px);
+  box-shadow:0 0 24px rgba(0,255,208,.14);
 }
 
-.footer-instagram-link span{
-  color:inherit;
-}
-
-.footer-instagram-link:focus-visible{
-  color:#00ffd0;
+.footer-social-button:focus-visible{
   outline:2px solid #00ffd0;
   outline-offset:3px;
-  border-radius:.2rem;
 }
 
 .footer-bottom{
