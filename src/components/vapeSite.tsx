@@ -693,15 +693,6 @@ const Footer = ({
 				<div className="footer-brand-block">
 					<img src="/assets/logo-vm.png" alt="Vape & More" className="footer-logo-white" />
 					<p>{t.nav.tagline}</p>
-					<a
-						aria-label="Instagram — Vape & More"
-						className="footer-social-button"
-						href={instagramUrl}
-						rel="noopener noreferrer"
-						target="_blank"
-					>
-						<InstagramIcon />
-					</a>
 				</div>
 				<div className="footer-links-grid">
 					<div className="footer-col">
@@ -735,6 +726,15 @@ const Footer = ({
 							+212 764 37 51 56
 						</a>
 						<span>{footer.city}</span>
+						<a
+							aria-label="Instagram — Vape & More"
+							className="footer-social-button"
+							href={instagramUrl}
+							rel="noopener noreferrer"
+							target="_blank"
+						>
+							<InstagramIcon />
+						</a>
 					</div>
 				</div>
 			</div>
