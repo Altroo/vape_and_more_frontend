@@ -13,6 +13,7 @@ type TranslationTree = (typeof translations)[LanguageCode];
 
 const ageStorageKey = 'vape_more_age_verified_until';
 const langStorageKey = 'vape_more_lang';
+const instagramUrl = 'https://www.instagram.com/vapeandmore.official/';
 const fallbackHeroImages = [
 	{ key: 'fallback-1', image: '/assets/photo-01.png', alt: '', sort_order: 1 },
 	{ key: 'fallback-2', image: '/assets/photo-02.png', alt: '', sort_order: 2 },
@@ -621,12 +622,12 @@ const Contact = ({ siteContent, t }: { siteContent: SiteContent; t: TranslationT
 				<div className="social-name">{t.contact.email}</div>
 				<div className="social-handle">{siteContent.email}</div>
 			</a>
-			<a className="social-card" href="https://www.instagram.com/vapeandmoreofficial" rel="noopener" target="_blank">
+			<a className="social-card" href={instagramUrl} rel="noopener noreferrer" target="_blank">
 				<span aria-hidden="true" className="social-logo">
 					<InstagramIcon />
 				</span>
 				<div className="social-name">Instagram</div>
-				<div className="social-handle">@vapeandmoreofficial</div>
+				<div className="social-handle">@vapeandmore.official</div>
 			</a>
 			<a className="social-card" href="https://www.tiktok.com/@vapeandmoreofficial" rel="noopener" target="_blank">
 				<span aria-hidden="true" className="social-logo">
@@ -692,6 +693,16 @@ const Footer = ({
 				<div className="footer-brand-block">
 					<img src="/assets/logo-vm.png" alt="Vape & More" className="footer-logo-white" />
 					<p>{t.nav.tagline}</p>
+					<div className="footer-socials">
+						<a
+							aria-label="Instagram — Vape & More"
+							href={instagramUrl}
+							rel="noopener noreferrer"
+							target="_blank"
+						>
+							<InstagramIcon />
+						</a>
+					</div>
 				</div>
 				<div className="footer-links-grid">
 					<div className="footer-col">

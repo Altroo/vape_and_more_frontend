@@ -2257,14 +2257,23 @@ footer{
 }
 
 .footer-socials a{
+  width:2.75rem;
+  height:2.75rem;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
   border:1px solid rgba(0,255,208,.22);
-  border-radius:999px;
-  padding:.46rem .8rem;
+  border-radius:50%;
+  padding:0;
   color:#fff;
   text-decoration:none;
-  font-size:.82rem;
   background:rgba(255,255,255,.025);
   transition:.25s ease;
+}
+
+.footer-socials svg{
+  width:1.35rem;
+  height:1.35rem;
 }
 
 .footer-col{
@@ -2291,10 +2300,16 @@ footer{
 }
 
 .footer-col a:hover,
-.footer-socials a:hover{
+.footer-socials a:hover,
+.footer-socials a:focus-visible{
   color:#00ffd0;
   border-color:rgba(0,255,208,.45);
   text-shadow:0 0 18px rgba(0,255,208,.35);
+}
+
+.footer-socials a:focus-visible{
+  outline:2px solid #00ffd0;
+  outline-offset:3px;
 }
 
 .footer-bottom{
