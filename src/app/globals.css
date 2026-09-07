@@ -1,1 +1,2 @@
-/* The visual system lives in /public/css/style.css, copied from the existing static site. */
+@import '../../public/css/fonts.css';
+@import '../../public/css/style.css';

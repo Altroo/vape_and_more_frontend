@@ -16,10 +16,6 @@ export const metadata: Metadata = {
 
 const RootLayout = ({ children }: Readonly<{ children: ReactNode }>) => (
 	<html lang="fr">
-		<head>
-			<link href="/css/fonts.css" rel="stylesheet" />
-			<link href="/css/style.css" rel="stylesheet" />
-		</head>
 		<body>{children}</body>
 	</html>
 );

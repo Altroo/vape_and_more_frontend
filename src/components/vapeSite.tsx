@@ -1,6 +1,7 @@
 'use client';
 
-import { type FormEvent, useEffect, useMemo, useState } from 'react';
+import { type SubmitEvent, useEffect, useMemo, useState, useSyncExternalStore } from 'react';
+import Image from 'next/image';
 import { languages, translations, type LanguageCode } from '@/data/translations';
 import type { Brand, Product, PromotionPack, Shop, SiteContent } from '@/utils/siteApi';
 
@@ -13,6 +14,17 @@ type TranslationTree = (typeof translations)[LanguageCode];
 
 const ageStorageKey = 'vape_more_age_verified_until';
 const langStorageKey = 'vape_more_lang';
+const preferencesEvent = 'vape-more-preferences-change';
+
+const subscribeToPreferences = (onChange: () => void) => {
+	window.addEventListener('storage', onChange);
+	window.addEventListener(preferencesEvent, onChange);
+	return () => {
+		window.removeEventListener('storage', onChange);
+		window.removeEventListener(preferencesEvent, onChange);
+	};
+};
+
 const instagramUrl = 'https://www.instagram.com/vapeandmore.official/';
 const fallbackHeroImages = [
 	{ key: 'fallback-1', image: '/assets/photo-01.png', alt: '', sort_order: 1 },
@@ -117,10 +129,10 @@ const homeAnchor = (id: string, catalogOnly?: boolean) => (catalogOnly ? `/#${id
 const catalogueMode: 'image-sheets' | 'products' = 'image-sheets';
 
 const catalogueSheets = [
-	{ key: 'af-1', title: 'Catalogue Al Fakher 1', image: '/catalogue_images/1 AF.png', fileName: 'catalogue-al-fakher-1.png' },
-	{ key: 'af-2', title: 'Catalogue Al Fakher 2', image: '/catalogue_images/2 AF.png', fileName: 'catalogue-al-fakher-2.png' },
-	{ key: 'nerd-1', title: 'Catalogue Nerd 1', image: '/catalogue_images/Nerd 1.png', fileName: 'catalogue-nerd-1.png' },
-	{ key: 'nerd-2', title: 'Catalogue Nerd 2', image: '/catalogue_images/Nerd 2.png', fileName: 'catalogue-nerd-2.png' },
+	{ key: 'af-1', title: 'Catalogue Al Fakher 1', image: '/catalogue_images/1 AF.png', fileName: 'catalogue-al-fakher-1.png', width: 1034, height: 1520 },
+	{ key: 'af-2', title: 'Catalogue Al Fakher 2', image: '/catalogue_images/2 AF.png', fileName: 'catalogue-al-fakher-2.png', width: 1050, height: 1498 },
+	{ key: 'nerd-1', title: 'Catalogue Nerd 1', image: '/catalogue_images/Nerd 1.png', fileName: 'catalogue-nerd-1.png', width: 1055, height: 1491 },
+	{ key: 'nerd-2', title: 'Catalogue Nerd 2', image: '/catalogue_images/Nerd 2.png', fileName: 'catalogue-nerd-2.png', width: 1052, height: 1494 },
 ];
 
 const brandListFromProducts = (products: Product[]) => {
@@ -154,19 +166,18 @@ const TikTokIcon = () => (
 );
 
 const AgeGate = ({ t }: { t: TranslationTree }) => {
-	const [isVisible, setIsVisible] = useState(false);
-
-	useEffect(() => {
-		const savedUntil = Number(window.localStorage.getItem(ageStorageKey) || 0);
-		setIsVisible(savedUntil <= Date.now());
-	}, []);
+	const isVisible = useSyncExternalStore(
+		subscribeToPreferences,
+		() => Number(window.localStorage.getItem(ageStorageKey) || 0) <= Date.now(),
+		() => false,
+	);
 
 	if (!isVisible) return null;
 
 	const confirmAge = () => {
 		const thirtyDays = 30 * 24 * 60 * 60 * 1000;
 		window.localStorage.setItem(ageStorageKey, String(Date.now() + thirtyDays));
-		setIsVisible(false);
+		window.dispatchEvent(new Event(preferencesEvent));
 	};
 
 	return (
@@ -174,7 +185,7 @@ const AgeGate = ({ t }: { t: TranslationTree }) => {
 			<div className="age-gate-card">
 				<div className="age-gate-top">{t.age.top}</div>
 				<div className="age-gate-body">
-					<img className="age-gate-logo" src="/assets/logo-vm.png" alt="Vape & More" />
+					<Image className="age-gate-logo" src="/assets/logo-vm.png" alt="Vape & More" width={714} height={374} />
 					<h2 id="ageGateTitle">VAPE & MORE</h2>
 					<p>{t.age.copy}</p>
 					<div className="age-gate-actions">
@@ -208,7 +219,7 @@ const Header = ({
 	return (
 		<nav aria-label="Navigation principale">
 			<a aria-label="Vape and More — Accueil" className="nav-logo" href={catalogOnly ? '/' : '#accueil'} onClick={closeMenu}>
-				<img alt="Logo VM Vape and More" src="/assets/logo-vm.png" />
+				<Image alt="Logo VM Vape and More" src="/assets/logo-vm.png" width={714} height={374} loading="eager" />
 				<div className="nav-logo-text">
 					<strong>Vape & More</strong>
 					<span>{t.nav.tagline}</span>
@@ -293,8 +304,7 @@ const Marquee = ({ t }: { t: TranslationTree }) => (
 );
 
 const Hero = ({ siteContent, t }: { siteContent: SiteContent; t: TranslationTree }) => {
-	const images = siteContent.heroImages.length > 0 ? siteContent.heroImages : fallbackHeroImages;
-	const slides = images;
+	const slides = siteContent.heroImages.length > 0 ? siteContent.heroImages : fallbackHeroImages;
 	const slideSeconds = 6;
 	const animationDuration = `${slides.length * slideSeconds}s`;
 
@@ -302,7 +312,10 @@ const Hero = ({ siteContent, t }: { siteContent: SiteContent; t: TranslationTree
 		<section className="hero hero-photo" id="accueil">
 			<div className="hero-photo-stage" aria-hidden="true">
 				{slides.map((image, index) => (
-					<img
+					<Image
+						fill
+						preload={index === 0}
+						sizes="100vw"
 						className={`hero-photo-slide${index === 0 ? ' is-active' : ''}`}
 						src={imageSrc(image.image)}
 						alt={image.alt || ''}
@@ -364,7 +377,7 @@ const About = ({ t }: { t: TranslationTree }) => (
 	<section className="section about reveal visible" id="a-propos">
 		<div className="about-layout">
 			<div className="about-visual">
-				<img alt="Boutique Vape & More" loading="lazy" src="/assets/STORE.png" />
+				<Image alt="Boutique Vape & More" loading="lazy" src="/assets/STORE.png" width={1254} height={1254} />
 			</div>
 			<div className="about-content">
 				<div className="section-label">Vape & More</div>
@@ -393,7 +406,7 @@ const Brands = ({ brands, language, t }: { brands: Brand[]; language: LanguageCo
 				return (
 					<article className="brand-dark-card" key={brand.key}>
 						<div className="brand-dark-top">
-							<img className="brand-logo" src={imageSrc(brand.logo || brand.image)} alt={copy.headline || brand.label} loading="lazy" />
+							<Image className="brand-logo" src={imageSrc(brand.logo || brand.image)} alt={copy.headline || brand.label} loading="lazy" width={230} height={125} />
 						</div>
 						<div className="brand-dark-content">
 							<h3>{copy.headline || brand.label}</h3>
@@ -474,13 +487,13 @@ const PromotionPacks = ({
 							<div className="solo-slider" aria-label="Vapes Solo Nerd 20K disponibles">
 								{gallery.map((image, imageIndex) => (
 									<div className="solo-slide" key={`${image}-${imageIndex}`}>
-										<img src={imageSrc(image)} alt={copy.title} loading="lazy" />
+										<Image src={imageSrc(image)} alt={copy.title} loading="lazy" width={430} height={176} />
 									</div>
 								))}
 							</div>
 						) : (
 							<div className={`pack-visual single-pack${index === 1 ? ' trio' : ''}`}>
-								<img src={imageSrc(gallery[0])} alt={copy.title} loading="lazy" />
+								<Image src={imageSrc(gallery[0])} alt={copy.title} loading="lazy" width={430} height={176} />
 							</div>
 						)}
 						<div className="promo-content">
@@ -546,7 +559,7 @@ const ProductCatalog = ({
 						return (
 							<article className="catalog-card" key={product.key}>
 								<div className="catalog-image">
-									<img src={imageSrc(product.image)} alt={copy.name} loading="lazy" />
+									<Image src={imageSrc(product.image)} alt={copy.name} loading="lazy" width={400} height={210} />
 								</div>
 								<div className="catalog-content">
 									<div className="product-brand">{product.brand}</div>
@@ -585,7 +598,7 @@ const CatalogueImages = ({ t }: { t: TranslationTree }) => (
 				{catalogueSheets.map((sheet) => (
 					<article className="catalogue-image-card" key={sheet.key}>
 						<a className="catalogue-image-link" href={sheet.image} target="_blank" rel="noopener" aria-label={sheet.title}>
-							<img src={sheet.image} alt={sheet.title} loading="lazy" />
+							<Image src={sheet.image} alt={sheet.title} loading="lazy" width={sheet.width} height={sheet.height} />
 						</a>
 						<div className="catalogue-image-actions">
 							<h2>{sheet.title}</h2>
@@ -670,7 +683,7 @@ const Footer = ({
 	const [isError, setIsError] = useState(false);
 	const brandLinks = siteContent.brands.length > 0 ? siteContent.brands : [];
 
-	const submitNewsletter = (event: FormEvent<HTMLFormElement>) => {
+	const submitNewsletter = (event: SubmitEvent<HTMLFormElement>) => {
 		event.preventDefault();
 		const trimmed = email.trim();
 		const isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmed);
@@ -691,7 +704,7 @@ const Footer = ({
 			<div className="footer-glow" />
 			<div className="premium-footer-grid">
 				<div className="footer-brand-block">
-					<img src="/assets/logo-vm.png" alt="Vape & More" className="footer-logo-white" />
+					<Image src="/assets/logo-vm.png" alt="Vape & More" className="footer-logo-white" width={714} height={374} />
 					<p>{t.nav.tagline}</p>
 				</div>
 				<div className="footer-links-grid">
@@ -772,11 +785,16 @@ const Footer = ({
 
 export const VapeSite = ({ siteContent, catalogOnly = false }: VapeSiteProps) => {
 	const defaultLang = siteContent.defaultLang || 'fr';
-	const [language, setLanguage] = useState<LanguageCode>(defaultLang);
+	const language = useSyncExternalStore(
+		subscribeToPreferences,
+		() => getStoredLanguage(defaultLang),
+		() => defaultLang,
+	);
 
-	useEffect(() => {
-		setLanguage(getStoredLanguage(defaultLang));
-	}, [defaultLang]);
+	const handleLanguageChange = (nextLanguage: LanguageCode) => {
+		window.localStorage.setItem(langStorageKey, nextLanguage);
+		window.dispatchEvent(new Event(preferencesEvent));
+	};
 
 	useEffect(() => {
 		const dir = languages.find((item) => item.code === language)?.dir || 'ltr';
@@ -789,7 +807,6 @@ export const VapeSite = ({ siteContent, catalogOnly = false }: VapeSiteProps) =>
 			document.body.removeAttribute('data-page');
 		}
 		document.body.classList.toggle('is-rtl', dir === 'rtl');
-		window.localStorage.setItem(langStorageKey, language);
 		return () => {
 			document.body.classList.remove('is-rtl');
 			document.body.removeAttribute('data-page');
@@ -802,7 +819,7 @@ export const VapeSite = ({ siteContent, catalogOnly = false }: VapeSiteProps) =>
 		<>
 			{catalogOnly ? null : <AgeGate t={t} />}
 			<div className="content">
-				<Header language={language} t={t} catalogOnly={catalogOnly} onLanguageChange={setLanguage} />
+				<Header language={language} t={t} catalogOnly={catalogOnly} onLanguageChange={handleLanguageChange} />
 				<Marquee t={t} />
 				{catalogOnly ? (
 					catalogueMode === 'image-sheets' ? (

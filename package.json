@@ -4,24 +4,30 @@
   "private": true,
   "scripts": {
     "dev": "next dev -p 3007",
+    "debug": "next dev -p 3007 --inspect",
     "build": "next build",
     "start": "next start -p 3007",
     "lint": "eslint",
-    "typecheck": "tsc --noEmit"
+    "upgrade": "bun x ncu -u"
   },
   "dependencies": {
-    "@types/node": "^26.0.0",
-    "@types/react": "^19.2.17",
-    "@types/react-dom": "^19.2.3",
-    "next": "^16.2.9",
-    "react": "^19.2.7",
-    "react-dom": "^19.2.7",
-    "typescript": "6.0.3"
+    "next": "^16.3.4",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8"
   },
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^8.61.1",
-    "@typescript-eslint/parser": "^8.61.1",
-    "eslint": "9.39.2",
-    "eslint-config-next": "^16.2.9"
+    "@types/node": "^26.4.1",
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.7",
+    "@typescript-eslint/eslint-plugin": "^8.69.0",
+    "@typescript-eslint/parser": "^8.69.0",
+    "eslint": "10.10.0",
+    "eslint-config-next": "^16.3.4",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.6",
+    "npm-check-updates": "^23.1.0",
+    "prettier": "^3.9.6",
+    "@typescript/native": "npm:typescript@^7.0.2",
+    "typescript": "npm:@typescript/typescript6@^6.0.2"
   }
 }
