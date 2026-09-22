@@ -5441,3 +5441,466 @@ body.is-rtl .footer-newsletter-button:focus-visible span{
   display:none !important;
   background:none !important;
 }
+
+/* Two-brand layout. */
+.brands-dark-grid{
+  grid-template-columns:repeat(2,minmax(0,380px)) !important;
+  justify-content:center !important;
+}
+
+/* AF 15K offer adapted to the existing Vape & More visual system. */
+.af15k-heading{
+  max-width:940px;
+  margin:0 auto;
+  text-align:center;
+}
+
+.af15k-card{
+  display:grid;
+  grid-template-columns:minmax(270px,.96fr) minmax(360px,1.18fr);
+  max-width:940px;
+  margin:1rem auto 1.25rem;
+  overflow:hidden;
+  border:1px solid rgba(109,216,203,.34);
+  border-radius:22px;
+  background:rgba(0,0,0,.72);
+  box-shadow:var(--shadow),inset 0 0 32px rgba(79,207,194,.035);
+}
+
+.af15k-product-panel{
+  position:relative;
+  display:grid;
+  place-items:center;
+  min-height:520px;
+  padding:1.75rem;
+  isolation:isolate;
+  overflow:hidden;
+  background:
+    radial-gradient(ellipse 63% 42% at 18% 63%,rgba(0,255,208,.21),transparent 72%),
+    radial-gradient(ellipse 66% 54% at 89% 35%,rgba(25,70,255,.27),transparent 72%),
+    radial-gradient(ellipse 42% 35% at 52% 99%,rgba(79,207,194,.13),transparent 78%),
+    linear-gradient(145deg,#000 0%,#050505 50%,#000 100%);
+}
+
+.af15k-product-panel::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:-1;
+  background:
+    linear-gradient(90deg,rgba(0,0,0,.54),transparent 23%,transparent 77%,rgba(0,0,0,.54)),
+    linear-gradient(180deg,rgba(0,0,0,.1),transparent 44%,rgba(0,0,0,.7));
+  pointer-events:none;
+}
+
+.af15k-product-panel::after{
+  content:"";
+  position:absolute;
+  z-index:-1;
+  bottom:3rem;
+  left:50%;
+  width:min(82%,360px);
+  height:1px;
+  transform:translateX(-50%);
+  background:linear-gradient(90deg,transparent,rgba(109,216,203,.5),transparent);
+  box-shadow:0 0 26px 6px rgba(79,207,194,.2);
+  animation:af15k-platform-pulse 4.8s ease-in-out infinite;
+}
+
+.af15k-vapes{
+  position:absolute;
+  z-index:2;
+  bottom:3.25rem;
+  left:50%;
+  display:block;
+  width:min(96%,390px);
+  height:auto;
+  transform:translateX(-50%);
+  filter:drop-shadow(0 22px 18px rgba(0,0,0,.65));
+  user-select:none;
+}
+
+.af15k-shine{
+  position:absolute;
+  z-index:3;
+  inset:4rem 1.4rem 3rem;
+  overflow:hidden;
+  pointer-events:none;
+}
+
+.af15k-shine::after{
+  content:"";
+  position:absolute;
+  top:-12%;
+  bottom:-12%;
+  left:-34%;
+  width:28%;
+  transform:skewX(-18deg);
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.08) 18%,rgba(209,255,252,.58) 50%,rgba(255,255,255,.08) 82%,transparent);
+  filter:blur(4px);
+  opacity:0;
+  animation:af15k-reflection-sweep 5.8s ease-in-out infinite;
+}
+
+.af15k-limited-badge{
+  position:absolute;
+  top:1.5rem;
+  left:1.5rem;
+  z-index:4;
+  margin:0;
+  padding:.55rem 1rem;
+  border:1px solid rgba(0,255,208,.72);
+  border-radius:999px;
+  background:linear-gradient(120deg,rgba(0,255,208,.86),rgba(25,70,255,.78));
+  box-shadow:0 10px 26px rgba(25,70,255,.26),inset 0 0 11px rgba(255,255,255,.1);
+  color:#fff;
+  font-size:.78rem;
+  font-weight:800;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+}
+
+.af15k-image-note{
+  position:absolute;
+  bottom:.9rem;
+  z-index:4;
+  margin:0;
+  color:rgba(212,222,234,.72);
+  font-size:.68rem;
+  letter-spacing:.03em;
+}
+
+.af15k-details{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto;
+  align-items:center;
+  column-gap:.9rem;
+  padding:1.65rem 2.1rem 1.4rem;
+}
+
+.af15k-details h3,
+.af15k-product-choice,
+.af15k-field-label,
+.af15k-select-wrap,
+.af15k-flavour-list{
+  grid-column:1 / -1;
+}
+
+.af15k-details h3{
+  margin:0;
+  color:#fff;
+  font-size:clamp(1.8rem,3.6vw,2.5rem);
+  line-height:1.1;
+}
+
+.af15k-product-choice{
+  margin:.25rem 0 1.1rem;
+  color:var(--brand-primary);
+  font-size:clamp(1.15rem,2vw,1.42rem);
+  font-weight:700;
+}
+
+.af15k-field-label{
+  display:block;
+  margin-bottom:.45rem;
+  font-size:.82rem;
+  font-weight:700;
+  letter-spacing:.09em;
+  text-transform:uppercase;
+}
+
+.af15k-select-wrap{
+  position:relative;
+}
+
+.af15k-select-wrap::after{
+  content:"⌄";
+  position:absolute;
+  top:50%;
+  right:1.1rem;
+  transform:translateY(-57%);
+  color:var(--brand-highlight);
+  font-size:1.7rem;
+  pointer-events:none;
+}
+
+.af15k-flavour-select{
+  width:100%;
+  min-height:55px;
+  appearance:none;
+  padding:0 3rem 0 1rem;
+  outline:none;
+  border:2px solid var(--brand-primary);
+  border-radius:15px;
+  background:rgba(0,0,0,.72);
+  color:var(--text);
+  font:inherit;
+  font-weight:500;
+  cursor:pointer;
+}
+
+.af15k-flavour-select:focus-visible{
+  box-shadow:0 0 0 4px rgba(79,207,194,.18);
+}
+
+.af15k-flavour-list{
+  max-height:245px;
+  margin:.2rem 0 0;
+  padding:.25rem 1rem;
+  overflow-y:auto;
+  border:1px solid rgba(109,216,203,.2);
+  border-radius:0 0 14px 14px;
+  background:rgba(255,255,255,.035);
+  list-style:none;
+  scrollbar-color:var(--brand-primary) rgba(255,255,255,.08);
+}
+
+.af15k-flavour-item{
+  display:flex;
+  width:100%;
+  min-height:43px;
+  align-items:center;
+  gap:.65rem;
+  padding:0;
+  border:0;
+  border-bottom:1px solid rgba(109,216,203,.12);
+  background:transparent;
+  color:var(--text);
+  font:inherit;
+  font-size:.86rem;
+  text-align:left;
+  cursor:pointer;
+}
+
+.af15k-flavour-list li:last-child .af15k-flavour-item{
+  border-bottom:0;
+}
+
+.af15k-flavour-item:hover,
+.af15k-flavour-item:focus-visible,
+.af15k-flavour-item.is-selected{
+  color:var(--brand-highlight);
+}
+
+.af15k-fruit-photo{
+  display:block;
+  width:31px;
+  height:31px;
+  flex:0 0 31px;
+  overflow:hidden;
+  border:1px solid rgba(109,216,203,.3);
+  border-radius:9px;
+  background-color:rgba(255,255,255,.06);
+  background-image:url("/assets/promos/af15k-flavours.webp");
+  background-repeat:no-repeat;
+  background-size:600% 300%;
+  box-shadow:inset 0 0 0 1px rgba(0,0,0,.18);
+}
+
+.af15k-flavour-name{
+  flex:1;
+}
+
+.af15k-stock{
+  display:inline-flex;
+  align-items:center;
+  gap:.4rem;
+  color:var(--text-soft);
+  font-size:.78rem;
+}
+
+.af15k-stock::before{
+  content:"✓";
+  display:grid;
+  width:19px;
+  height:19px;
+  place-items:center;
+  border-radius:50%;
+  background:#00ffd0;
+  color:#061523;
+  font-size:.76rem;
+  font-weight:800;
+}
+
+.af15k-price{
+  display:flex;
+  grid-column:1;
+  align-items:baseline;
+  gap:.9rem;
+  margin:.9rem 0 .8rem;
+  white-space:nowrap;
+}
+
+.af15k-price del{
+  color:var(--text-dim);
+  font-size:1.4rem;
+  text-decoration-thickness:2px;
+}
+
+.af15k-price strong{
+  color:var(--brand-highlight);
+  font-size:clamp(2.5rem,5.5vw,3.9rem);
+  font-weight:800;
+  line-height:1;
+  letter-spacing:-.06em;
+  text-shadow:0 0 18px rgba(79,207,194,.25);
+}
+
+.af15k-whatsapp-button{
+  display:flex;
+  grid-column:2;
+  min-height:48px;
+  align-self:center;
+  align-items:center;
+  justify-content:center;
+  gap:.5rem;
+  padding:0 .9rem;
+  overflow:hidden;
+  border:1px solid rgba(0,255,208,.78);
+  border-radius:12px;
+  background:linear-gradient(120deg,rgba(0,255,208,.9),rgba(25,70,255,.82));
+  color:#fff;
+  font-size:.72rem;
+  font-weight:800;
+  letter-spacing:.06em;
+  line-height:1;
+  text-decoration:none;
+  text-transform:uppercase;
+  white-space:nowrap;
+  transition:transform .18s ease,box-shadow .18s ease;
+}
+
+.af15k-whatsapp-button:hover,
+.af15k-whatsapp-button:focus-visible{
+  transform:translateY(-2px);
+  box-shadow:0 12px 28px rgba(25,70,255,.35);
+}
+
+.af15k-whatsapp-icon{
+  width:18px;
+  height:18px;
+  flex:0 0 18px;
+}
+
+.af15k-footnote{
+  margin:0;
+  text-align:center;
+  color:var(--text-dim);
+  font-size:.8rem;
+}
+
+body.is-rtl .af15k-select-wrap::after{
+  right:auto;
+  left:1.1rem;
+}
+
+body.is-rtl .af15k-flavour-select{
+  padding-right:1rem;
+  padding-left:3rem;
+}
+
+body.is-rtl .af15k-flavour-item{
+  text-align:right;
+}
+
+.catalogue-empty-page{
+  min-height:calc(100vh - 132px);
+}
+
+@keyframes af15k-reflection-sweep{
+  0%,15%{transform:translateX(0) skewX(-18deg);opacity:0}
+  23%{opacity:.76}
+  48%,100%{transform:translateX(550%) skewX(-18deg);opacity:0}
+}
+
+@keyframes af15k-platform-pulse{
+  0%,100%{opacity:.5;transform:translateX(-50%) scaleX(.9)}
+  50%{opacity:1;transform:translateX(-50%) scaleX(1.06)}
+}
+
+@media(max-width:920px){
+  .brands-dark-grid{
+    grid-template-columns:minmax(0,520px) !important;
+  }
+
+  .af15k-card{
+    grid-template-columns:1fr;
+  }
+
+  .af15k-product-panel{
+    min-height:410px;
+  }
+
+  .af15k-vapes{
+    bottom:3rem;
+    width:min(94%,325px);
+  }
+}
+
+@media(max-width:560px){
+  .af15k-card{
+    border-radius:17px;
+  }
+
+  .af15k-details{
+    column-gap:.55rem;
+    padding:1.55rem 1.2rem 1.35rem;
+  }
+
+  .af15k-limited-badge{
+    top:1rem;
+    left:1rem;
+    padding:.5rem .8rem;
+    font-size:.7rem;
+  }
+
+  .af15k-flavour-item{
+    gap:.55rem;
+    font-size:.82rem;
+  }
+
+  .af15k-stock{
+    font-size:.7rem;
+  }
+
+  .af15k-price{
+    gap:.65rem;
+  }
+
+  .af15k-price del{
+    font-size:1.05rem;
+  }
+
+  .af15k-price strong{
+    font-size:2.15rem;
+  }
+
+  .af15k-whatsapp-button{
+    min-height:42px;
+    gap:.35rem;
+    padding:0 .6rem;
+    font-size:.62rem;
+  }
+}
+
+@media(max-width:430px){
+  .af15k-price,
+  .af15k-whatsapp-button{
+    grid-column:1 / -1;
+  }
+
+  .af15k-price{
+    justify-content:center;
+  }
+
+  .af15k-whatsapp-button{
+    width:100%;
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+  .af15k-product-panel::after,
+  .af15k-shine::after{
+    animation:none;
+  }
+}

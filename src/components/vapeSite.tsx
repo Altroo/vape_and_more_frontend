@@ -3,7 +3,7 @@
 import { type SubmitEvent, useEffect, useMemo, useState, useSyncExternalStore } from 'react';
 import Image from 'next/image';
 import { languages, translations, type LanguageCode } from '@/data/translations';
-import type { Brand, Product, PromotionPack, Shop, SiteContent } from '@/utils/siteApi';
+import type { Brand, Product, Shop, SiteContent } from '@/utils/siteApi';
 
 type VapeSiteProps = {
 	siteContent: SiteContent;
@@ -27,7 +27,7 @@ const subscribeToPreferences = (onChange: () => void) => {
 
 const instagramUrl = 'https://www.instagram.com/vapeandmore.official/';
 const fallbackHeroImages = [
-	{ key: 'fallback-1', image: '/assets/photo-01.png', alt: '', sort_order: 1 },
+	{ key: 'fallback-1', image: '/assets/hero-rectif-022.png', alt: '', sort_order: 1 },
 	{ key: 'fallback-2', image: '/assets/photo-02.png', alt: '', sort_order: 2 },
 	{ key: 'fallback-3', image: '/assets/photo-03.png', alt: '', sort_order: 3 },
 ];
@@ -122,18 +122,138 @@ const imageSrc = (source: string | undefined, fallback = '/assets/logo-vm.png') 
 	return imagePathAliases[source] ?? source;
 };
 
+const heroImageSrc = (source: string | undefined) =>
+	source === '/assets/photo-01.png' ? '/assets/hero-rectif-022.png' : imageSrc(source);
+
 const waHref = (phone: string, message: string) => `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
 
 const homeAnchor = (id: string, catalogOnly?: boolean) => (catalogOnly ? `/#${id}` : `#${id}`);
 
 const catalogueMode: 'image-sheets' | 'products' = 'image-sheets';
 
-const catalogueSheets = [
-	{ key: 'af-1', title: 'Catalogue Al Fakher 1', image: '/catalogue_images/1 AF.png', fileName: 'catalogue-al-fakher-1.png', width: 1034, height: 1520 },
-	{ key: 'af-2', title: 'Catalogue Al Fakher 2', image: '/catalogue_images/2 AF.png', fileName: 'catalogue-al-fakher-2.png', width: 1050, height: 1498 },
-	{ key: 'nerd-1', title: 'Catalogue Nerd 1', image: '/catalogue_images/Nerd 1.png', fileName: 'catalogue-nerd-1.png', width: 1055, height: 1491 },
-	{ key: 'nerd-2', title: 'Catalogue Nerd 2', image: '/catalogue_images/Nerd 2.png', fileName: 'catalogue-nerd-2.png', width: 1052, height: 1494 },
-];
+const isNerdBrand = (brand: Brand) => brand.key.toLowerCase() === 'nerd' || brand.label.trim().toLowerCase() === 'nerd';
+
+const af15kFlavours = [
+	{ name: 'Berry Bleu', family: 'berries' },
+	{ name: 'Berry Ice', family: 'berries' },
+	{ name: 'Blue Razz Blast', family: 'berries' },
+	{ name: 'Blue Razz Lemonade', family: 'berries' },
+	{ name: 'Blueberry Mint', family: 'berries' },
+	{ name: 'Blueberry Raspberry', family: 'berries' },
+	{ name: 'Blue Sour Raspberry', family: 'berries' },
+	{ name: 'Cherry Ice', family: 'berries' },
+	{ name: 'Hubba', family: 'sweet' },
+	{ name: 'Ice Blue', family: 'fresh' },
+	{ name: 'Lemon Lime', family: 'citrus' },
+	{ name: 'Lemon Lime Cherry Fizz', family: 'citrus' },
+	{ name: 'Mango Pineapple', family: 'tropical' },
+	{ name: 'Mixed Berry', family: 'berries' },
+	{ name: 'Orange Mint', family: 'citrus' },
+	{ name: 'Space Dream', family: 'sweet' },
+	{ name: 'Summer Dream', family: 'tropical' },
+	{ name: 'Watermelon Pineapple', family: 'tropical' },
+] as const;
+
+type Af15kFamily = (typeof af15kFlavours)[number]['family'];
+type Af15kFlavour = (typeof af15kFlavours)[number]['name'];
+
+const af15kCopy = {
+	fr: {
+		kicker: 'Offre limitée',
+		subtitle: 'Choisissez votre saveur et profitez de l’offre.',
+		badge: '20 jours seulement',
+		imageNote: 'AF 15K • Tous les arômes disponibles',
+		product: 'Vape AF 15K',
+		choice: '1 vape AF 15K au choix',
+		fieldLabel: 'Choisissez votre arôme',
+		all: 'Tous les arômes disponibles',
+		available: 'Disponible',
+		order: 'Commander',
+		footnote: 'Offre valable pendant 20 jours • Dans la limite des stocks disponibles',
+		message: 'Bonjour, je souhaite commander 1 Vape AF 15K à 200 DH, arôme : {flavour}.',
+		families: {
+			berries: 'Fruits rouges',
+			sweet: 'Gourmands',
+			fresh: 'Frais',
+			citrus: 'Agrumes',
+			tropical: 'Tropicaux',
+		},
+	},
+	ar: {
+		kicker: 'عرض محدود',
+		subtitle: 'اختاروا النكهة واستفيدوا من العرض.',
+		badge: '20 يوما فقط',
+		imageNote: 'AF 15K • جميع النكهات متوفرة',
+		product: 'Vape AF 15K',
+		choice: 'جهاز AF 15K واحد من اختياركم',
+		fieldLabel: 'اختاروا النكهة',
+		all: 'جميع النكهات المتوفرة',
+		available: 'متوفر',
+		order: 'اطلب الآن',
+		footnote: 'العرض صالح لمدة 20 يوما • في حدود المخزون المتوفر',
+		message: 'مرحبا، أريد طلب جهاز Vape AF 15K بسعر 200 درهم، النكهة: {flavour}.',
+		families: {
+			berries: 'الفواكه الحمراء',
+			sweet: 'نكهات حلوة',
+			fresh: 'منعشة',
+			citrus: 'حمضيات',
+			tropical: 'استوائية',
+		},
+	},
+	en: {
+		kicker: 'Limited offer',
+		subtitle: 'Choose your flavour and enjoy the offer.',
+		badge: '20 days only',
+		imageNote: 'AF 15K • All flavours available',
+		product: 'AF 15K Vape',
+		choice: '1 AF 15K vape of your choice',
+		fieldLabel: 'Choose your flavour',
+		all: 'All available flavours',
+		available: 'Available',
+		order: 'Order now',
+		footnote: 'Offer valid for 20 days • While stocks last',
+		message: 'Hello, I would like to order 1 AF 15K Vape for 200 DH, flavour: {flavour}.',
+		families: { berries: 'Berries', sweet: 'Sweet', fresh: 'Fresh', citrus: 'Citrus', tropical: 'Tropical' },
+	},
+	es: {
+		kicker: 'Oferta limitada',
+		subtitle: 'Elige tu sabor y disfruta de la oferta.',
+		badge: 'Solo 20 días',
+		imageNote: 'AF 15K • Todos los sabores disponibles',
+		product: 'Vape AF 15K',
+		choice: '1 vape AF 15K a elegir',
+		fieldLabel: 'Elige tu sabor',
+		all: 'Todos los sabores disponibles',
+		available: 'Disponible',
+		order: 'Pedir ahora',
+		footnote: 'Oferta válida durante 20 días • Hasta agotar existencias',
+		message: 'Hola, quiero pedir 1 Vape AF 15K por 200 DH, sabor: {flavour}.',
+		families: {
+			berries: 'Frutos rojos',
+			sweet: 'Dulces',
+			fresh: 'Frescos',
+			citrus: 'Cítricos',
+			tropical: 'Tropicales',
+		},
+	},
+} satisfies Record<
+	LanguageCode,
+	{
+		kicker: string;
+		subtitle: string;
+		badge: string;
+		imageNote: string;
+		product: string;
+		choice: string;
+		fieldLabel: string;
+		all: string;
+		available: string;
+		order: string;
+		footnote: string;
+		message: string;
+		families: Record<Af15kFamily, string>;
+	}
+>;
 
 const brandListFromProducts = (products: Product[]) => {
 	const brands = new Map<string, string>();
@@ -218,7 +338,12 @@ const Header = ({
 
 	return (
 		<nav aria-label="Navigation principale">
-			<a aria-label="Vape and More — Accueil" className="nav-logo" href={catalogOnly ? '/' : '#accueil'} onClick={closeMenu}>
+			<a
+				aria-label="Vape and More — Accueil"
+				className="nav-logo"
+				href={catalogOnly ? '/' : '#accueil'}
+				onClick={closeMenu}
+			>
 				<Image alt="Logo VM Vape and More" src="/assets/logo-vm.png" width={714} height={374} loading="eager" />
 				<div className="nav-logo-text">
 					<strong>Vape & More</strong>
@@ -317,7 +442,7 @@ const Hero = ({ siteContent, t }: { siteContent: SiteContent; t: TranslationTree
 						preload={index === 0}
 						sizes="100vw"
 						className={`hero-photo-slide${index === 0 ? ' is-active' : ''}`}
-						src={imageSrc(image.image)}
+						src={heroImageSrc(image.image)}
 						alt={image.alt || ''}
 						key={image.key}
 						style={{
@@ -347,7 +472,7 @@ const Hero = ({ siteContent, t }: { siteContent: SiteContent; t: TranslationTree
 };
 
 const Features = ({ siteContent, t }: { siteContent: SiteContent; t: TranslationTree }) => {
-	const brandCount = siteContent.counts.officialBrands || siteContent.brands.length;
+	const brandCount = 2;
 	const shopCount = siteContent.counts.officialShops || siteContent.shops.filter((shop) => shop.current).length;
 
 	return (
@@ -406,7 +531,14 @@ const Brands = ({ brands, language, t }: { brands: Brand[]; language: LanguageCo
 				return (
 					<article className="brand-dark-card" key={brand.key}>
 						<div className="brand-dark-top">
-							<Image className="brand-logo" src={imageSrc(brand.logo || brand.image)} alt={copy.headline || brand.label} loading="lazy" width={230} height={125} />
+							<Image
+								className="brand-logo"
+								src={imageSrc(brand.logo || brand.image)}
+								alt={copy.headline || brand.label}
+								loading="lazy"
+								width={230}
+								height={125}
+							/>
 						</div>
 						<div className="brand-dark-content">
 							<h3>{copy.headline || brand.label}</h3>
@@ -450,7 +582,13 @@ const Shops = ({ shops, language, t }: { shops: Shop[]; language: LanguageCode; 
 							</a>
 						</div>
 						<div className="map-frame">
-							<iframe allowFullScreen loading="lazy" referrerPolicy="no-referrer-when-downgrade" src={mapSrc} title={copy.name} />
+							<iframe
+								allowFullScreen
+								loading="lazy"
+								referrerPolicy="no-referrer-when-downgrade"
+								src={mapSrc}
+								title={copy.name}
+							/>
 						</div>
 					</article>
 				);
@@ -459,61 +597,113 @@ const Shops = ({ shops, language, t }: { shops: Shop[]; language: LanguageCode; 
 	</section>
 );
 
-const PromotionPacks = ({
-	packs,
-	language,
-	t,
-	phone,
-}: {
-	packs: PromotionPack[];
-	language: LanguageCode;
-	t: TranslationTree;
-	phone: string;
-}) => (
-	<section className="promo-packs reveal visible" id="promotion">
-		<div className="section-kicker">{t.promo.kicker}</div>
-		<h2>{t.promo.title}</h2>
-		<p className="promo-intro">{t.promo.intro}</p>
-		<div className="promo-grid final-promo-grid">
-			{packs.map((pack, index) => {
-				const copy = localized(pack.texts, language, { title: pack.key, target: '', description: '' });
-				const message = localized(pack.whatsapp_messages, language, copy.title);
-				const gallery = pack.images.length > 0 ? pack.images.map((item) => item.image) : [pack.image];
-				const isSolo = gallery.length > 1;
-				return (
-					<article className={`promo-card${isSolo ? ' solo-pack' : ''}`} key={pack.key}>
-						{pack.discount_label ? <span className={`discount${pack.is_best_offer ? ' best' : ''}`}>{pack.discount_label}</span> : null}
-						{isSolo ? (
-							<div className="solo-slider" aria-label="Vapes Solo Nerd 20K disponibles">
-								{gallery.map((image, imageIndex) => (
-									<div className="solo-slide" key={`${image}-${imageIndex}`}>
-										<Image src={imageSrc(image)} alt={copy.title} loading="lazy" width={430} height={176} />
-									</div>
-								))}
-							</div>
-						) : (
-							<div className={`pack-visual single-pack${index === 1 ? ' trio' : ''}`}>
-								<Image src={imageSrc(gallery[0])} alt={copy.title} loading="lazy" width={430} height={176} />
-							</div>
-						)}
-						<div className="promo-content">
-							<h3>{copy.title}</h3>
-							<p className="target">{copy.target}</p>
-							<p>{copy.description}</p>
-							<div className="price-row">
-								{pack.old_price ? <del>{pack.old_price}</del> : null}
-								<strong>{pack.price}</strong>
-							</div>
-							<a className="btn-primary" href={waHref(phone, message)} target="_blank" rel="noopener">
-								{t.common.whatsappOrder}
-							</a>
-						</div>
-					</article>
-				);
-			})}
-		</div>
-	</section>
-);
+const Af15kOffer = ({ language, phone }: { language: LanguageCode; phone: string }) => {
+	const copy = af15kCopy[language];
+	const [activeFamily, setActiveFamily] = useState<Af15kFamily | 'all'>('all');
+	const [selectedFlavour, setSelectedFlavour] = useState<Af15kFlavour>(af15kFlavours[0].name);
+	const visibleFlavours =
+		activeFamily === 'all' ? af15kFlavours : af15kFlavours.filter((flavour) => flavour.family === activeFamily);
+	const families = Array.from(new Set(af15kFlavours.map((flavour) => flavour.family)));
+	const message = copy.message.replace('{flavour}', selectedFlavour);
+
+	const changeFamily = (nextFamily: Af15kFamily | 'all') => {
+		setActiveFamily(nextFamily);
+		const firstVisible =
+			nextFamily === 'all' ? af15kFlavours[0] : af15kFlavours.find((flavour) => flavour.family === nextFamily);
+		if (firstVisible) setSelectedFlavour(firstVisible.name);
+	};
+
+	return (
+		<section className="promo-packs af15k-offer reveal visible" id="promotion" aria-labelledby="af15k-title">
+			<header className="af15k-heading">
+				<div className="section-kicker">{copy.kicker}</div>
+				<h2 id="af15k-title">AF 15K</h2>
+				<p className="promo-intro">{copy.subtitle}</p>
+			</header>
+			<div className="af15k-card">
+				<div className="af15k-product-panel">
+					<p className="af15k-limited-badge">{copy.badge}</p>
+					<Image
+						className="af15k-vapes"
+						src="/assets/promos/af15k-vapes.webp"
+						alt="Al Fakher AF 15K"
+						loading="lazy"
+						width={1312}
+						height={1199}
+					/>
+					<span className="af15k-shine" aria-hidden="true" />
+					<p className="af15k-image-note">{copy.imageNote}</p>
+				</div>
+
+				<div className="af15k-details">
+					<h3>{copy.product}</h3>
+					<p className="af15k-product-choice">{copy.choice}</p>
+					<label className="af15k-field-label" htmlFor="af15k-flavour-family">
+						{copy.fieldLabel}
+					</label>
+					<div className="af15k-select-wrap">
+						<select
+							id="af15k-flavour-family"
+							className="af15k-flavour-select"
+							value={activeFamily}
+							onChange={(event) => changeFamily(event.target.value as Af15kFamily | 'all')}
+						>
+							<option value="all">{copy.all}</option>
+							{families.map((family) => (
+								<option value={family} key={family}>
+									{copy.families[family]}
+								</option>
+							))}
+						</select>
+					</div>
+					<ul className="af15k-flavour-list" aria-live="polite">
+						{visibleFlavours.map((flavour) => {
+							const flavourIndex = af15kFlavours.indexOf(flavour);
+							const backgroundPosition = `${(flavourIndex % 6) * 20}% ${Math.floor(flavourIndex / 6) * 50}%`;
+							return (
+								<li key={flavour.name}>
+									<button
+										className={`af15k-flavour-item${flavour.name === selectedFlavour ? ' is-selected' : ''}`}
+										type="button"
+										onClick={() => setSelectedFlavour(flavour.name)}
+									>
+										<span className="af15k-fruit-photo" style={{ backgroundPosition }} aria-hidden="true" />
+										<span className="af15k-flavour-name">{flavour.name}</span>
+										<span className="af15k-stock">{copy.available}</span>
+									</button>
+								</li>
+							);
+						})}
+					</ul>
+					<div className="af15k-price">
+						<del>230 DH</del>
+						<strong>200 DH</strong>
+					</div>
+					<a className="af15k-whatsapp-button" href={waHref(phone, message)} target="_blank" rel="noopener">
+						<svg className="af15k-whatsapp-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+							<path
+								d="M20.52 11.62a8.36 8.36 0 0 1-12.33 7.39L4 20l1.06-4.05a8.36 8.36 0 1 1 15.46-4.33Z"
+								stroke="currentColor"
+								strokeWidth="1.85"
+								strokeLinecap="round"
+								strokeLinejoin="round"
+							/>
+							<path
+								d="M8.87 8.45c.16-.37.33-.38.57-.39h.48c.15 0 .35.06.4.33l.55 1.45c.06.17.03.37-.1.52l-.42.51c-.12.14-.1.3.01.45.29.49.71.94 1.16 1.32.52.44 1.04.72 1.56.9.16.06.33.04.45-.09l.5-.57c.13-.15.3-.2.48-.13l1.36.64c.22.1.28.22.25.43-.06.43-.24.87-.57 1.1-.24.17-.56.3-1 .26-.5-.05-1.52-.44-2.85-1.67-1.06-.98-1.78-2.16-1.97-2.72-.19-.56-.2-1.02-.09-1.3Z"
+								stroke="currentColor"
+								strokeWidth="1.45"
+								strokeLinecap="round"
+								strokeLinejoin="round"
+							/>
+						</svg>
+						{copy.order}
+					</a>
+				</div>
+			</div>
+			<p className="af15k-footnote">{copy.footnote}</p>
+		</section>
+	);
+};
 
 const ProductCatalog = ({
 	products,
@@ -528,7 +718,8 @@ const ProductCatalog = ({
 }) => {
 	const brands = useMemo(() => brandListFromProducts(products), [products]);
 	const [activeBrand, setActiveBrand] = useState('all');
-	const visibleProducts = activeBrand === 'all' ? products : products.filter((product) => product.brand_key === activeBrand);
+	const visibleProducts =
+		activeBrand === 'all' ? products : products.filter((product) => product.brand_key === activeBrand);
 
 	return (
 		<main className="catalog-page-main">
@@ -537,7 +728,11 @@ const ProductCatalog = ({
 				<h1>{t.catalog.title}</h1>
 				<p className="catalog-intro">{t.catalog.intro}</p>
 				<div className="catalog-toolbar" id="catalogFilters" aria-label="Filtres catalogue">
-					<button className={`catalog-filter${activeBrand === 'all' ? ' is-active' : ''}`} type="button" onClick={() => setActiveBrand('all')}>
+					<button
+						className={`catalog-filter${activeBrand === 'all' ? ' is-active' : ''}`}
+						type="button"
+						onClick={() => setActiveBrand('all')}
+					>
 						{t.common.all}
 					</button>
 					{brands.map((brand) => (
@@ -588,28 +783,13 @@ const ProductCatalog = ({
 	);
 };
 
-const CatalogueImages = ({ t }: { t: TranslationTree }) => (
+const CatalogueImages = () => (
 	<main className="catalog-page-main">
-		<section className="catalog-section catalog-page-section reveal visible" id="catalogue">
-			<div className="section-kicker">{t.catalog.kicker}</div>
-			<h1>{t.catalog.title}</h1>
-			<p className="catalog-intro">{t.catalog.intro}</p>
-			<div className="catalogue-image-grid" id="catalogGrid" aria-live="polite">
-				{catalogueSheets.map((sheet) => (
-					<article className="catalogue-image-card" key={sheet.key}>
-						<a className="catalogue-image-link" href={sheet.image} target="_blank" rel="noopener" aria-label={sheet.title}>
-							<Image src={sheet.image} alt={sheet.title} loading="lazy" width={sheet.width} height={sheet.height} />
-						</a>
-						<div className="catalogue-image-actions">
-							<h2>{sheet.title}</h2>
-							<a className="btn-primary catalogue-download" href={sheet.image} download={sheet.fileName}>
-								{t.common.download}
-							</a>
-						</div>
-					</article>
-				))}
-			</div>
-		</section>
+		<section
+			className="catalog-section catalog-page-section catalogue-empty-page"
+			id="catalogue"
+			aria-label="Catalogue"
+		/>
 	</main>
 );
 
@@ -619,7 +799,12 @@ const Contact = ({ siteContent, t }: { siteContent: SiteContent; t: TranslationT
 		<h2 className="section-title">{t.contact.title}</h2>
 		<p>{t.contact.intro}</p>
 		<div className="social-cards">
-			<a className="social-card" href={waHref(siteContent.phone, 'Bonjour, je souhaite contacter Vape & More.')} target="_blank" rel="noopener">
+			<a
+				className="social-card"
+				href={waHref(siteContent.phone, 'Bonjour, je souhaite contacter Vape & More.')}
+				target="_blank"
+				rel="noopener"
+			>
 				<span aria-hidden="true" className="social-logo">
 					<PhoneIcon />
 				</span>
@@ -659,7 +844,11 @@ const CatalogFab = ({ t }: { t: TranslationTree }) => (
 		<span className="catalog-fab-icon" aria-hidden="true">
 			<svg viewBox="0 0 24 24" width="20" height="20" fill="none">
 				<path d="M5 6.5h14M5 12h14M5 17.5h14" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
-				<path d="M4.5 4.5h15a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-15a1 1 0 0 1-1-1v-13a1 1 0 0 1 1-1Z" stroke="currentColor" strokeWidth="1.6" />
+				<path
+					d="M4.5 4.5h15a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-15a1 1 0 0 1-1-1v-13a1 1 0 0 1 1-1Z"
+					stroke="currentColor"
+					strokeWidth="1.6"
+				/>
 			</svg>
 		</span>
 		<span>{t.nav.catalog}</span>
@@ -681,7 +870,7 @@ const Footer = ({
 	const [email, setEmail] = useState('');
 	const [status, setStatus] = useState('');
 	const [isError, setIsError] = useState(false);
-	const brandLinks = siteContent.brands.length > 0 ? siteContent.brands : [];
+	const brandLinks = siteContent.brands.filter((brand) => !isNerdBrand(brand));
 
 	const submitNewsletter = (event: SubmitEvent<HTMLFormElement>) => {
 		event.preventDefault();
@@ -814,6 +1003,7 @@ export const VapeSite = ({ siteContent, catalogOnly = false }: VapeSiteProps) =>
 	}, [catalogOnly, language]);
 
 	const t = translations[language];
+	const visibleBrands = siteContent.brands.filter((brand) => !isNerdBrand(brand));
 
 	return (
 		<>
@@ -823,7 +1013,7 @@ export const VapeSite = ({ siteContent, catalogOnly = false }: VapeSiteProps) =>
 				<Marquee t={t} />
 				{catalogOnly ? (
 					catalogueMode === 'image-sheets' ? (
-						<CatalogueImages t={t} />
+						<CatalogueImages />
 					) : (
 						<ProductCatalog products={siteContent.catalog} language={language} t={t} phone={siteContent.phone} />
 					)
@@ -832,9 +1022,9 @@ export const VapeSite = ({ siteContent, catalogOnly = false }: VapeSiteProps) =>
 						<Hero siteContent={siteContent} t={t} />
 						<Features siteContent={siteContent} t={t} />
 						<About t={t} />
-						<Brands brands={siteContent.brands} language={language} t={t} />
+						<Brands brands={visibleBrands} language={language} t={t} />
 						<Shops shops={siteContent.shops} language={language} t={t} />
-						<PromotionPacks packs={siteContent.promotionPacks} language={language} t={t} phone={siteContent.phone} />
+						<Af15kOffer language={language} phone={siteContent.phone} />
 						<Contact siteContent={siteContent} t={t} />
 						<CatalogFab t={t} />
 					</>

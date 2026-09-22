@@ -26,11 +26,12 @@ export const translations = {
 			contact: 'Contactez-nous',
 		},
 		tickerAge: 'PRODUITS RÉSERVÉS AUX +18',
-		ticker: 'DÉCOUVREZ NOS PROMOTIONS SUR NOS PACKS ALLANT JUSQU’À 20%',
+		ticker: 'Profitez de nos promotions exclusives, valables pendant 20 jours seulement !',
 		hero: {
 			eyebrow: 'Vape & More',
 			titleLines: ['Vapez en confiance.', 'Produits authentiques.', 'Conseils experts.'],
-			description: 'Expertise en boutique, authenticité garantie et conseils personnalisés pour choisir le produit adapté.',
+			description:
+				'Expertise en boutique, authenticité garantie et conseils personnalisés pour choisir le produit adapté.',
 			primaryCta: 'Découvrir nos produits',
 			secondaryCta: 'Voir les promotions',
 		},
@@ -43,13 +44,16 @@ export const translations = {
 			kicker: 'Vape & More',
 			title: 'À propos',
 			lead: 'Votre boutique spécialisée dans la vape premium.',
-			copy1: 'Vape & More réunit des marques officielles, des produits authentiques et une sélection pensée pour offrir une expérience claire, fiable et élégante.',
-			copy2: 'Notre équipe vous accompagne en boutique pour découvrir les produits disponibles, les nouveautés et les références adaptées à vos préférences.',
+			copy1:
+				'Vape & More réunit des marques officielles, des produits authentiques et une sélection pensée pour offrir une expérience claire, fiable et élégante.',
+			copy2:
+				'Notre équipe vous accompagne en boutique pour découvrir les produits disponibles, les nouveautés et les références adaptées à vos préférences.',
 		},
 		brands: {
 			kicker: 'Distribution officielle',
 			title: 'Nos marques',
-			intro: 'Une sélection premium de marques reconnues, avec des visuels produits et une structure claire par marque.',
+			intro:
+				'Une sélection premium de marques reconnues, avec des visuels produits et une structure claire par marque.',
 		},
 		shops: {
 			kicker: 'Nous trouver',
@@ -62,13 +66,14 @@ export const translations = {
 		},
 		promo: {
 			kicker: 'Offres limitées',
-			title: 'Packs promotionnels',
-			intro: 'Choisissez votre pack Nerd 20K et profitez des offres spéciales Vape & More.',
+			title: 'AF 15K',
+			intro: 'Choisissez votre saveur et profitez de l’offre.',
 		},
 		catalog: {
 			kicker: 'Catalogue',
 			title: 'Catalogue produits',
-			intro: 'Consultez les catalogues actuels en image, en attendant l’intégration produit par produit avec visuels et informations détaillées.',
+			intro:
+				'Consultez les catalogues actuels en image, en attendant l’intégration produit par produit avec visuels et informations détaillées.',
 		},
 		common: {
 			all: 'Toutes les marques',
@@ -88,7 +93,8 @@ export const translations = {
 			email: 'E-mail',
 			city: 'Casablanca, Maroc',
 		},
-		legal: 'Produits destinés uniquement aux adultes. Vape & More encourage une consommation responsable et la vérification des produits avant achat.',
+		legal:
+			'Produits destinés uniquement aux adultes. Vape & More encourage une consommation responsable et la vérification des produits avant achat.',
 	},
 	ar: {
 		age: {
@@ -144,8 +150,8 @@ export const translations = {
 		},
 		promo: {
 			kicker: 'عروض محدودة',
-			title: 'باقات ترويجية',
-			intro: 'اختاروا باقة Nerd 20K واستفيدوا من عروض Vape & More الخاصة.',
+			title: 'AF 15K',
+			intro: 'اختاروا النكهة واستفيدوا من العرض.',
 		},
 		catalog: {
 			kicker: 'الكتالوغ',
@@ -207,8 +213,10 @@ export const translations = {
 			kicker: 'Vape & More',
 			title: 'About',
 			lead: 'Your specialist store for premium vape products.',
-			copy1: 'Vape & More brings together official brands, authentic products, and a curated selection designed for a clear, reliable, and refined experience.',
-			copy2: 'Our team guides you in-store through available products, new arrivals, and options that match your preferences.',
+			copy1:
+				'Vape & More brings together official brands, authentic products, and a curated selection designed for a clear, reliable, and refined experience.',
+			copy2:
+				'Our team guides you in-store through available products, new arrivals, and options that match your preferences.',
 		},
 		brands: {
 			kicker: 'Official distribution',
@@ -226,13 +234,14 @@ export const translations = {
 		},
 		promo: {
 			kicker: 'Limited offers',
-			title: 'Promotional packs',
-			intro: 'Choose your Nerd 20K pack and enjoy Vape & More special offers.',
+			title: 'AF 15K',
+			intro: 'Choose your flavour and enjoy the offer.',
 		},
 		catalog: {
 			kicker: 'Catalog',
 			title: 'Product catalog',
-			intro: 'Browse the current catalogue sheets as images while individual products, visuals, and detailed information are prepared.',
+			intro:
+				'Browse the current catalogue sheets as images while individual products, visuals, and detailed information are prepared.',
 		},
 		common: {
 			all: 'All brands',
@@ -252,7 +261,8 @@ export const translations = {
 			email: 'Email',
 			city: 'Casablanca, Morocco',
 		},
-		legal: 'Products intended for adults only. Vape & More encourages responsible consumption and product verification before purchase.',
+		legal:
+			'Products intended for adults only. Vape & More encourages responsible consumption and product verification before purchase.',
 	},
 	es: {
 		age: {
@@ -276,7 +286,8 @@ export const translations = {
 		hero: {
 			eyebrow: 'Vape & More',
 			titleLines: ['Vapea con confianza.', 'Productos auténticos.', 'Asesoría experta.'],
-			description: 'Asesoramiento en tienda, autenticidad garantizada y atención personalizada para elegir el producto adecuado.',
+			description:
+				'Asesoramiento en tienda, autenticidad garantizada y atención personalizada para elegir el producto adecuado.',
 			primaryCta: 'Descubrir productos',
 			secondaryCta: 'Ver promociones',
 		},
@@ -289,8 +300,10 @@ export const translations = {
 			kicker: 'Vape & More',
 			title: 'Sobre nosotros',
 			lead: 'Tu tienda especializada en vapeo premium.',
-			copy1: 'Vape & More reúne marcas oficiales, productos auténticos y una selección cuidada para una experiencia clara, fiable y elegante.',
-			copy2: 'Nuestro equipo te asesora en tienda para descubrir los productos disponibles, las novedades y las opciones adaptadas a tus preferencias.',
+			copy1:
+				'Vape & More reúne marcas oficiales, productos auténticos y una selección cuidada para una experiencia clara, fiable y elegante.',
+			copy2:
+				'Nuestro equipo te asesora en tienda para descubrir los productos disponibles, las novedades y las opciones adaptadas a tus preferencias.',
 		},
 		brands: {
 			kicker: 'Distribución oficial',
@@ -308,13 +321,14 @@ export const translations = {
 		},
 		promo: {
 			kicker: 'Ofertas limitadas',
-			title: 'Packs promocionales',
-			intro: 'Elige tu pack Nerd 20K y disfruta de las ofertas especiales de Vape & More.',
+			title: 'AF 15K',
+			intro: 'Elige tu sabor y disfruta de la oferta.',
 		},
 		catalog: {
 			kicker: 'Catálogo',
 			title: 'Catálogo de productos',
-			intro: 'Consulta los catálogos actuales como imágenes mientras se prepara la integración individual de productos, imágenes e información detallada.',
+			intro:
+				'Consulta los catálogos actuales como imágenes mientras se prepara la integración individual de productos, imágenes e información detallada.',
 		},
 		common: {
 			all: 'Todas las marcas',
@@ -329,11 +343,13 @@ export const translations = {
 		contact: {
 			kicker: 'Contacto directo',
 			title: 'Contáctanos',
-			intro: '¿Tienes alguna pregunta sobre los productos o cómo llegar? Contacta con Vape & More o visita la tienda directamente.',
+			intro:
+				'¿Tienes alguna pregunta sobre los productos o cómo llegar? Contacta con Vape & More o visita la tienda directamente.',
 			phone: 'Teléfono',
 			email: 'Email',
 			city: 'Casablanca, Marruecos',
 		},
-		legal: 'Productos destinados exclusivamente a adultos. Vape & More fomenta el consumo responsable y la verificación de productos antes de comprar.',
+		legal:
+			'Productos destinados exclusivamente a adultos. Vape & More fomenta el consumo responsable y la verificación de productos antes de comprar.',
 	},
 } satisfies Record<LanguageCode, Record<string, unknown>>;
