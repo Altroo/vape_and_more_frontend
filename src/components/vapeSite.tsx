@@ -414,7 +414,7 @@ const Marquee = ({ t }: { t: TranslationTree }) => (
 	<div className="vm-marquee">
 		<div className="vm-marquee-track">
 			{Array.from({ length: 6 }).map((_, index) => (
-				<span key={`ticker-${index}`}>{index % 2 === 0 ? t.tickerAge : t.ticker}</span>
+				<span key={`ticker-${index}`}>{index % 2 === 0 ? t.ticker : t.tickerAge}</span>
 			))}
 		</div>
 	</div>

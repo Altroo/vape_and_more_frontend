@@ -114,7 +114,7 @@ export const translations = {
 			contact: 'تواصل معنا',
 		},
 		tickerAge: 'منتجات مخصصة لمن هم 18 سنة فما فوق',
-		ticker: 'اكتشفوا عروضنا على الباقات بتخفيض يصل إلى 20%',
+		ticker: 'استفيدوا من عروضنا الحصرية، الصالحة لمدة 20 يوماً فقط!',
 		hero: {
 			eyebrow: 'Vape & More',
 			titleLines: ['فيب بثقة.', 'منتجات أصلية.', 'نصائح خبراء.'],
@@ -196,7 +196,7 @@ export const translations = {
 			contact: 'Contact',
 		},
 		tickerAge: '+18 PRODUCTS ONLY',
-		ticker: 'DISCOVER OUR PACK PROMOTIONS WITH DISCOUNTS UP TO 20%',
+		ticker: 'Enjoy our exclusive promotions, valid for only 20 days!',
 		hero: {
 			eyebrow: 'Vape & More',
 			titleLines: ['Vape with confidence.', 'Authentic products.', 'Expert advice.'],
@@ -282,7 +282,7 @@ export const translations = {
 			contact: 'Contacto',
 		},
 		tickerAge: 'PRODUCTOS SOLO PARA +18',
-		ticker: 'DESCUBRE NUESTRAS PROMOCIONES EN PACKS CON DESCUENTOS DE HASTA EL 20%',
+		ticker: '¡Disfruta de nuestras promociones exclusivas, válidas durante solo 20 días!',
 		hero: {
 			eyebrow: 'Vape & More',
 			titleLines: ['Vapea con confianza.', 'Productos auténticos.', 'Asesoría experta.'],
