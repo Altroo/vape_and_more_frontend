@@ -382,11 +382,6 @@ const Header = ({
 					</a>
 				</li>
 				<li>
-					<a href="/catalogue" aria-current={catalogOnly ? 'page' : undefined} onClick={closeMenu}>
-						{t.nav.catalog}
-					</a>
-				</li>
-				<li>
 					<a href={homeAnchor('promotion', catalogOnly)} onClick={closeMenu}>
 						{t.nav.promo}
 					</a>
@@ -836,22 +831,6 @@ const Contact = ({ siteContent, t }: { siteContent: SiteContent; t: TranslationT
 	</section>
 );
 
-const CatalogFab = ({ t }: { t: TranslationTree }) => (
-	<a className="catalog-fab" href="/catalogue" aria-label={t.nav.catalog}>
-		<span className="catalog-fab-icon" aria-hidden="true">
-			<svg viewBox="0 0 24 24" width="20" height="20" fill="none">
-				<path d="M5 6.5h14M5 12h14M5 17.5h14" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
-				<path
-					d="M4.5 4.5h15a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-15a1 1 0 0 1-1-1v-13a1 1 0 0 1 1-1Z"
-					stroke="currentColor"
-					strokeWidth="1.6"
-				/>
-			</svg>
-		</span>
-		<span>{t.nav.catalog}</span>
-	</a>
-);
-
 const Footer = ({
 	siteContent,
 	language,
@@ -1023,7 +1002,6 @@ export const VapeSite = ({ siteContent, catalogOnly = false }: VapeSiteProps) =>
 						<Shops shops={siteContent.shops} language={language} t={t} />
 						<Af15kOffer language={language} phone={siteContent.phone} />
 						<Contact siteContent={siteContent} t={t} />
-						<CatalogFab t={t} />
 					</>
 				)}
 				<Footer siteContent={siteContent} language={language} t={t} catalogOnly={catalogOnly} />
