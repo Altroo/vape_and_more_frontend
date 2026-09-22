@@ -418,11 +418,8 @@ const Header = ({
 const Marquee = ({ t }: { t: TranslationTree }) => (
 	<div className="vm-marquee">
 		<div className="vm-marquee-track">
-			{Array.from({ length: 3 }).map((_, index) => (
-				<span key={`age-${index}`}>{t.tickerAge}</span>
-			))}
-			{Array.from({ length: 3 }).map((_, index) => (
-				<span key={`ticker-${index}`}>{t.ticker}</span>
+			{Array.from({ length: 6 }).map((_, index) => (
+				<span key={`ticker-${index}`}>{index % 2 === 0 ? t.tickerAge : t.ticker}</span>
 			))}
 		</div>
 	</div>
