@@ -5455,6 +5455,16 @@ body.is-rtl .footer-newsletter-button:focus-visible span{
   text-align:center;
 }
 
+.af15k-heading .section-kicker{
+  font-size:38px !important;
+  font-weight:700 !important;
+  line-height:1.15 !important;
+}
+
+.af15k-heading .promo-intro{
+  padding-top:20px !important;
+}
+
 .af15k-card{
   display:grid;
   grid-template-columns:minmax(270px,.96fr) minmax(360px,1.18fr);
@@ -5510,12 +5520,13 @@ body.is-rtl .footer-newsletter-button:focus-visible span{
 .af15k-vapes{
   position:absolute;
   z-index:2;
-  bottom:3.25rem;
+  top:50%;
+  bottom:auto;
   left:50%;
   display:block;
   width:min(96%,390px);
   height:auto;
-  transform:translateX(-50%);
+  transform:translate(-50%,-50%);
   filter:drop-shadow(0 22px 18px rgba(0,0,0,.65));
   user-select:none;
 }
@@ -5832,12 +5843,16 @@ body.is-rtl .af15k-flavour-item{
   }
 
   .af15k-vapes{
-    bottom:3rem;
     width:min(94%,325px);
   }
 }
 
 @media(max-width:560px){
+  .af15k-heading .section-kicker{
+    font-size:28px !important;
+    line-height:1.2 !important;
+  }
+
   .af15k-card{
     border-radius:17px;
   }

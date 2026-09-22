@@ -614,7 +614,7 @@ const Af15kOffer = ({ language, phone }: { language: LanguageCode; phone: string
 		<section className="promo-packs af15k-offer reveal visible" id="promotion" aria-labelledby="af15k-title">
 			<header className="af15k-heading">
 				<div className="section-kicker">{copy.kicker}</div>
-				<h2 id="af15k-title">AF 15K</h2>
+				<h2 id="af15k-title">Al Fakher Crown Bar</h2>
 				<p className="promo-intro">{copy.subtitle}</p>
 			</header>
 			<div className="af15k-card">
