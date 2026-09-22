@@ -454,7 +454,7 @@ const Hero = ({ siteContent, t }: { siteContent: SiteContent; t: TranslationTree
 				</h1>
 				<p className="hero-desc">{t.hero.description}</p>
 				<div className="hero-cta">
-					<a className="hero-aurora-button" href="/catalogue">
+					<a className="hero-aurora-button" href="#promotion">
 						<span>{t.hero.primaryCta}</span>
 					</a>
 				</div>
