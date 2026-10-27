@@ -3,8 +3,19 @@
 import { type SubmitEvent, useEffect, useState, useSyncExternalStore } from 'react';
 import Image from 'next/image';
 import { languages, translations, type LanguageCode } from '@/data/translations';
-import { ageStorageKey, langStorageKey, preferencesEvent, instagramUrl, fallbackHeroImages, footerCopy, imagePathAliases, catalogueMode, af15kFlavours, af15kCopy } from '@/data/rawData';
-import type { Af15kFamily, Af15kFlavour, Brand, Product, Shop, SiteContent, VapeSiteProps } from '@/types/site';
+import {
+	ageStorageKey,
+	langStorageKey,
+	preferencesEvent,
+	instagramUrl,
+	fallbackHeroImages,
+	footerCopy,
+	imagePathAliases,
+	af15kFlavours,
+	af15kCopy,
+} from '@/data/rawData';
+import type { Af15kFamily, Af15kFlavour, Brand, Shop, SiteContent, VapeSiteProps } from '@/types/site';
+import { AdalyaCatalogue } from '@/components/adalyaCatalogue';
 
 type TranslationTree = (typeof translations)[LanguageCode];
 
@@ -36,20 +47,17 @@ const imageSrc = (source: string | undefined, fallback = '/assets/logo-vm.png') 
 	return imagePathAliases[source] ?? source;
 };
 
-const heroImageSrc = (source: string | undefined) =>
-	source === '/assets/photo-01.png' ? '/assets/hero-rectif-022.png' : imageSrc(source);
+const heroImageSrc = (source: string | undefined) => {
+	if (source === '/assets/photo-01.png') return '/assets/hero-rectif-022.png';
+	if (source === '/assets/photo-03.png') return '/assets/hero-bg-02.png';
+	return imageSrc(source);
+};
 
 const waHref = (phone: string, message: string) => `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
 
 const homeAnchor = (id: string, catalogOnly?: boolean) => (catalogOnly ? `/#${id}` : `#${id}`);
 
 const isNerdBrand = (brand: Brand) => brand.key.toLowerCase() === 'nerd' || brand.label.trim().toLowerCase() === 'nerd';
-
-const brandListFromProducts = (products: Product[]) => {
-	const brands = new Map<string, string>();
-	products.forEach((product) => brands.set(product.brand_key, product.brand));
-	return Array.from(brands.entries()).map(([key, label]) => ({ key, label }));
-};
 
 const PhoneIcon = () => (
 	<svg aria-hidden="true" fill="currentColor" height="24" viewBox="0 0 24 24" width="24">
@@ -66,12 +74,6 @@ const MailIcon = () => (
 const InstagramIcon = () => (
 	<svg aria-hidden="true" fill="currentColor" height="24" viewBox="0 0 24 24" width="24">
 		<path d="M7.75 2h8.5A5.76 5.76 0 0 1 22 7.75v8.5A5.76 5.76 0 0 1 16.25 22h-8.5A5.76 5.76 0 0 1 2 16.25v-8.5A5.76 5.76 0 0 1 7.75 2Zm0 1.8A3.96 3.96 0 0 0 3.8 7.75v8.5a3.96 3.96 0 0 0 3.95 3.95h8.5a3.96 3.96 0 0 0 3.95-3.95v-8.5a3.96 3.96 0 0 0-3.95-3.95Zm8.95 1.35a1.1 1.1 0 1 1 0 2.2 1.1 1.1 0 0 1 0-2.2ZM12 6.2A5.8 5.8 0 1 1 6.2 12 5.8 5.8 0 0 1 12 6.2Zm0 1.8A4 4 0 1 0 16 12a4 4 0 0 0-4-4Z" />
-	</svg>
-);
-
-const TikTokIcon = () => (
-	<svg aria-hidden="true" fill="currentColor" height="24" viewBox="0 0 24 24" width="24">
-		<path d="M15.57 2h2.92a4.57 4.57 0 0 0 3.51 3.52v2.94a7.38 7.38 0 0 1-3.83-1.08v7.08a6.46 6.46 0 1 1-6.47-6.46c.34 0 .68.03 1.01.08v3.01a3.59 3.59 0 1 0 2.86 3.52Z" />
 	</svg>
 );
 
@@ -172,6 +174,11 @@ const Header = ({
 					</a>
 				</li>
 				<li>
+					<a href="/catalogue" aria-current={catalogOnly ? 'page' : undefined} onClick={closeMenu}>
+						{t.nav.catalog}
+					</a>
+				</li>
+				<li>
 					<a href={homeAnchor('promotion', catalogOnly)} onClick={closeMenu}>
 						{t.nav.promo}
 					</a>
@@ -203,8 +210,14 @@ const Header = ({
 const Marquee = ({ t }: { t: TranslationTree }) => (
 	<div className="vm-marquee">
 		<div className="vm-marquee-track">
-			{Array.from({ length: 6 }).map((_, index) => (
-				<span key={`ticker-${index}`}>{index % 2 === 0 ? t.ticker : t.tickerAge}</span>
+			{[0, 1].map((copy) => (
+				<div className="vm-marquee-group" key={copy} aria-hidden={copy === 1 ? true : undefined}>
+					{[t.ticker, t.tickerAge, t.tickerArrivals, t.tickerAge].map((message, index) => (
+						<span key={index} dir="auto">
+							{message}
+						</span>
+					))}
+				</div>
 			))}
 		</div>
 	</div>
@@ -487,94 +500,6 @@ const Af15kOffer = ({ language, phone }: { language: LanguageCode; phone: string
 	);
 };
 
-const ProductCatalog = ({
-	products,
-	language,
-	t,
-	phone,
-}: {
-	products: Product[];
-	language: LanguageCode;
-	t: TranslationTree;
-	phone: string;
-}) => {
-	const brands = brandListFromProducts(products);
-	const [activeBrand, setActiveBrand] = useState('all');
-	const visibleProducts =
-		activeBrand === 'all' ? products : products.filter((product) => product.brand_key === activeBrand);
-
-	return (
-		<main className="catalog-page-main">
-			<section className="catalog-section catalog-page-section reveal visible" id="catalogue">
-				<div className="section-kicker">{t.catalog.kicker}</div>
-				<h1>{t.catalog.title}</h1>
-				<p className="catalog-intro">{t.catalog.intro}</p>
-				<div className="catalog-toolbar" id="catalogFilters" aria-label="Filtres catalogue">
-					<button
-						className={`catalog-filter${activeBrand === 'all' ? ' is-active' : ''}`}
-						type="button"
-						onClick={() => setActiveBrand('all')}
-					>
-						{t.common.all}
-					</button>
-					{brands.map((brand) => (
-						<button
-							className={`catalog-filter${activeBrand === brand.key ? ' is-active' : ''}`}
-							type="button"
-							key={brand.key}
-							onClick={() => setActiveBrand(brand.key)}
-						>
-							{brand.label}
-						</button>
-					))}
-				</div>
-				<div className="catalog-grid" id="catalogGrid" aria-live="polite">
-					{visibleProducts.map((product) => {
-						const copy = localized(product.texts, language, { name: product.key, description: '', flavors: [] });
-						const price = localized(product.price, language, '');
-						const message = t.common.whatsappProduct.replace('{product}', copy.name);
-						return (
-							<article className="catalog-card" key={product.key}>
-								<div className="catalog-image">
-									<Image src={imageSrc(product.image)} alt={copy.name} loading="lazy" width={400} height={210} />
-								</div>
-								<div className="catalog-content">
-									<div className="product-brand">{product.brand}</div>
-									<h3>{copy.name}</h3>
-									<p>{copy.description}</p>
-									<div className="catalog-flavors">
-										<strong>{t.common.flavors}</strong>
-										<span>{copy.flavors.join(' / ')}</span>
-									</div>
-									<div className="catalog-bottom">
-										<div className="catalog-price">
-											<span>{t.common.price}</span>
-											<strong>{price}</strong>
-										</div>
-										<a className="btn-primary" href={waHref(phone, message)} target="_blank" rel="noopener">
-											{t.common.whatsappOrder}
-										</a>
-									</div>
-								</div>
-							</article>
-						);
-					})}
-				</div>
-			</section>
-		</main>
-	);
-};
-
-const CatalogueImages = () => (
-	<main className="catalog-page-main">
-		<section
-			className="catalog-section catalog-page-section catalogue-empty-page"
-			id="catalogue"
-			aria-label="Catalogue"
-		/>
-	</main>
-);
-
 const Contact = ({ siteContent, t }: { siteContent: SiteContent; t: TranslationTree }) => (
 	<section className="social-section contact-section reveal visible" id="contact">
 		<div className="section-label">{t.contact.kicker}</div>
@@ -608,13 +533,6 @@ const Contact = ({ siteContent, t }: { siteContent: SiteContent; t: TranslationT
 				</span>
 				<div className="social-name">Instagram</div>
 				<div className="social-handle">@vapeandmore.official</div>
-			</a>
-			<a className="social-card" href="https://www.tiktok.com/@vapeandmoreofficial" rel="noopener" target="_blank">
-				<span aria-hidden="true" className="social-logo">
-					<TikTokIcon />
-				</span>
-				<div className="social-name">TikTok</div>
-				<div className="social-handle">@vapeandmoreofficial</div>
 			</a>
 		</div>
 		<p className="legal-note">{t.legal}</p>
@@ -778,11 +696,7 @@ export const VapeSite = ({ siteContent, catalogOnly = false }: VapeSiteProps) =>
 				<Header language={language} t={t} catalogOnly={catalogOnly} onLanguageChange={handleLanguageChange} />
 				<Marquee t={t} />
 				{catalogOnly ? (
-					catalogueMode === 'image-sheets' ? (
-						<CatalogueImages />
-					) : (
-						<ProductCatalog products={siteContent.catalog} language={language} t={t} phone={siteContent.phone} />
-					)
+					<AdalyaCatalogue language={language} />
 				) : (
 					<>
 						<Hero siteContent={siteContent} t={t} />

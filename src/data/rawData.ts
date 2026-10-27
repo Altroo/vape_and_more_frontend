@@ -9,7 +9,7 @@ export const instagramUrl = 'https://www.instagram.com/vapeandmore.official/';
 export const fallbackHeroImages = [
 	{ key: 'fallback-1', image: '/assets/hero-rectif-022.png', alt: '', sort_order: 1 },
 	{ key: 'fallback-2', image: '/assets/photo-02.png', alt: '', sort_order: 2 },
-	{ key: 'fallback-3', image: '/assets/photo-03.png', alt: '', sort_order: 3 },
+	{ key: 'fallback-3', image: '/assets/hero-bg-02.png', alt: '', sort_order: 3 },
 ];
 
 export const footerCopy = {
@@ -82,8 +82,6 @@ export const footerCopy = {
 export const imagePathAliases: Record<string, string> = {
 	'/assets/promos/DUO PACK + DRINK.png': '/assets/promos/duo_pack_drink.png',
 };
-
-export const catalogueMode: 'image-sheets' | 'products' = 'image-sheets';
 
 export const af15kFlavours = [
 	{ name: 'Berry Bleu', family: 'berries' },

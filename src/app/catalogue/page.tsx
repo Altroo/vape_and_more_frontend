@@ -3,8 +3,9 @@ import { VapeSite } from '@/components/vapeSite';
 import { fetchSiteContent } from '@/utils/siteApi';
 
 export const metadata: Metadata = {
-	title: 'Catalogue produits - Vape & More',
-	description: 'Catalogue Vape & More avec produits officiels, prix, saveurs et commande WhatsApp.',
+	title: 'Catalogue Adalya 15K - Vape & More',
+	description:
+		'Découvrez les 18 références Adalya 15K, leurs photographies et leurs profils aromatiques dans le catalogue Vape & More.',
 };
 
 const CataloguePage = async () => {

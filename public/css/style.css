@@ -1079,7 +1079,7 @@
 
 .contact-section .social-cards {
   max-width: 920px;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
 .contact-section .social-card {
@@ -5814,8 +5814,16 @@ body.is-rtl .af15k-flavour-item{
   text-align:right;
 }
 
-.catalogue-empty-page{
-  min-height:calc(100vh - 132px);
+.vm-marquee-track{
+  gap:0 !important;
+}
+
+.vm-marquee-group{
+  display:flex;
+  align-items:center;
+  flex-shrink:0;
+  gap:3rem;
+  padding-right:3rem;
 }
 
 @keyframes af15k-reflection-sweep{
