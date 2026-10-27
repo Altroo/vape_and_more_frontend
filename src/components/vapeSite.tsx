@@ -129,14 +129,14 @@ const Header = ({
 	const closeMenu = () => setIsOpen(false);
 
 	return (
-		<nav aria-label="Navigation principale">
+		<nav aria-label={t.common.navigationLabel}>
 			<a
-				aria-label="Vape and More — Accueil"
+				aria-label={`${t.nav.home} - Vape & More`}
 				className="nav-logo"
 				href={catalogOnly ? '/' : '#accueil'}
 				onClick={closeMenu}
 			>
-				<Image alt="Logo VM Vape and More" src="/assets/logo-vm.png" width={714} height={374} loading="eager" />
+				<Image alt="Vape & More" src="/assets/logo-vm.png" width={714} height={374} loading="eager" />
 				<div className="nav-logo-text">
 					<strong>
 						<bdi dir="ltr">Vape & More</bdi>
@@ -147,7 +147,7 @@ const Header = ({
 			<button
 				aria-controls="main-navigation"
 				aria-expanded={isOpen}
-				aria-label="Ouvrir le menu"
+				aria-label={isOpen ? t.common.closeMenu : t.common.openMenu}
 				className={`nav-toggle${isOpen ? ' is-open' : ''}`}
 				type="button"
 				onClick={() => setIsOpen((current) => !current)}
@@ -191,7 +191,7 @@ const Header = ({
 					</a>
 				</li>
 			</ul>
-			<div className="language-switcher" id="languageSwitcher" aria-label="Sélecteur de langue">
+			<div className="language-switcher" id="languageSwitcher" aria-label={t.common.languageSelector}>
 				{languages.map((item) => (
 					<button
 						className={`lang-option${item.code === language ? ' is-active' : ''}`}
@@ -275,7 +275,7 @@ const Features = ({ siteContent, t }: { siteContent: SiteContent; t: Translation
 	const shopCount = siteContent.counts.officialShops || siteContent.shops.filter((shop) => shop.current).length;
 
 	return (
-		<div aria-label="Points forts" className="features">
+		<div aria-label={t.common.highlights} className="features">
 			<div className="features-inner">
 				<div className="feat">
 					<div className="feat-mark" />
@@ -301,7 +301,7 @@ const About = ({ t }: { t: TranslationTree }) => (
 	<section className="section about reveal visible" id="a-propos">
 		<div className="about-layout">
 			<div className="about-visual">
-				<Image alt="Boutique Vape & More" loading="lazy" src="/assets/STORE.png" width={1254} height={1254} />
+				<Image alt={t.common.storePhoto} loading="lazy" src="/assets/STORE.png" width={1254} height={1254} />
 			</div>
 			<div className="about-content">
 				<div className="section-label">
@@ -502,7 +502,7 @@ const Contact = ({ siteContent, t }: { siteContent: SiteContent; t: TranslationT
 		<div className="social-cards">
 			<a
 				className="social-card"
-				href={waHref(siteContent.phone, 'Bonjour, je souhaite contacter Vape & More.')}
+				href={waHref(siteContent.phone, t.common.whatsappContact)}
 				target="_blank"
 				rel="noopener"
 			>
@@ -621,7 +621,7 @@ const Footer = ({
 						<a
 							className="phone-number"
 							dir="ltr"
-							href={waHref(siteContent.phone, 'Bonjour, je souhaite contacter Vape & More.')}
+							href={waHref(siteContent.phone, t.common.whatsappContact)}
 							target="_blank"
 							rel="noopener"
 						>
@@ -629,7 +629,7 @@ const Footer = ({
 						</a>
 						<span>{footer.city}</span>
 						<a
-							aria-label="Instagram — Vape & More"
+							aria-label={t.common.instagramLabel}
 							className="footer-social-button"
 							href={instagramUrl}
 							rel="noopener noreferrer"
