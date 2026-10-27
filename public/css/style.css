@@ -3919,8 +3919,8 @@ body.is-rtl .hero-photo .hero-desc{
 }
 
 .contact-section .social-cards{
-  grid-template-columns:repeat(4,minmax(0,1fr)) !important;
-  max-width:1120px !important;
+  grid-template-columns:repeat(3,minmax(0,1fr)) !important;
+  max-width:920px !important;
 }
 
 body.is-rtl{
