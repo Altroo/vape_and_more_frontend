@@ -93,6 +93,8 @@ export const translations = {
 			previous: 'Précédent',
 			next: 'Suivant',
 			keyboardHint: '← → pour parcourir',
+			order: 'Commander',
+			whatsappMessage: 'Bonjour, je souhaite commander : {product}.',
 		},
 		common: {
 			all: 'Toutes les marques',
@@ -196,6 +198,8 @@ export const translations = {
 			previous: 'السابق',
 			next: 'التالي',
 			keyboardHint: 'استخدموا ← → للتصفح',
+			order: 'اطلب الآن',
+			whatsappMessage: 'مرحبا، أود طلب: {product}.',
 		},
 		common: {
 			all: 'جميع العلامات التجارية',
@@ -300,6 +304,8 @@ export const translations = {
 			previous: 'Previous',
 			next: 'Next',
 			keyboardHint: '← → to browse',
+			order: 'Order now',
+			whatsappMessage: 'Hello, I would like to order: {product}.',
 		},
 		common: {
 			all: 'All brands',
@@ -406,6 +412,8 @@ export const translations = {
 			previous: 'Anterior',
 			next: 'Siguiente',
 			keyboardHint: '← → para navegar',
+			order: 'Pedir ahora',
+			whatsappMessage: 'Hola, quiero pedir: {product}.',
 		},
 		common: {
 			all: 'Todas las marcas',

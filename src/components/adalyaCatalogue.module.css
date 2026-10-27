@@ -35,6 +35,7 @@
 }
 
 .main button:focus-visible,
+.main a:focus-visible,
 .main input:focus-visible {
 	outline: 2px solid var(--brand-primary);
 	outline-offset: 4px;
@@ -231,6 +232,8 @@
 
 .card {
 	min-width: 0;
+	display: flex;
+	flex-direction: column;
 }
 
 .photo {
@@ -297,6 +300,21 @@
 
 .info {
 	padding: 16px 2px 0;
+	display: flex;
+	flex-direction: column;
+	flex: 1;
+}
+
+.info .description {
+	flex: 1;
+}
+
+.orderButton {
+	width: 100%;
+	margin-top: 16px;
+	padding: 12px 10px;
+	white-space: normal;
+	line-height: 1.4;
 }
 
 .meta {

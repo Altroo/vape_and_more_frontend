@@ -4,6 +4,7 @@ import { type CSSProperties, useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import { adalyaProducts } from '@/data/adalyaCatalogue';
 import { translations, type LanguageCode } from '@/data/translations';
+import { WhatsAppOrderButton } from '@/components/whatsAppOrderButton';
 import styles from './adalyaCatalogue.module.css';
 
 const alphabetFilters = [
@@ -32,8 +33,20 @@ const ExpandIcon = () => (
 	</svg>
 );
 
-export const AdalyaCatalogue = ({ language }: { language: LanguageCode }) => {
+export const AdalyaCatalogue = ({ language, phone }: { language: LanguageCode; phone: string }) => {
 	const copy = translations[language].catalog;
+	const orderButton = (name: string) => {
+		const productName = `ADALYA 15K - ${name}`;
+		return (
+			<WhatsAppOrderButton
+				phone={phone}
+				message={copy.whatsappMessage.replace('{product}', productName)}
+				label={copy.order}
+				ariaLabel={`${translations[language].common.whatsappOrder}: ${productName}`}
+				className={styles.orderButton}
+			/>
+		);
+	};
 	const [query, setQuery] = useState('');
 	const [activeFilter, setActiveFilter] = useState('all');
 	const [currentPhoto, setCurrentPhoto] = useState(0);
@@ -200,6 +213,7 @@ export const AdalyaCatalogue = ({ language }: { language: LanguageCode }) => {
 											</p>
 											<h3 dir="auto">{product.name}</h3>
 											<p className={styles.description}>{product.descriptions[language]}</p>
+											{orderButton(product.name)}
 										</div>
 									</article>
 								);
@@ -271,6 +285,7 @@ export const AdalyaCatalogue = ({ language }: { language: LanguageCode }) => {
 							{selectedProduct.name}
 						</h2>
 						<p className={styles.description}>{selectedProduct.descriptions[language]}</p>
+						{orderButton(selectedProduct.name)}
 						<span className={styles.dialogNumber} dir="ltr">
 							{String(currentPhoto + 1).padStart(2, '0')} / {total}
 						</span>
