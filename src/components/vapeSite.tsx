@@ -138,7 +138,9 @@ const Header = ({
 			>
 				<Image alt="Logo VM Vape and More" src="/assets/logo-vm.png" width={714} height={374} loading="eager" />
 				<div className="nav-logo-text">
-					<strong>Vape & More</strong>
+					<strong>
+						<bdi dir="ltr">Vape & More</bdi>
+					</strong>
 					<span>{t.nav.tagline}</span>
 				</div>
 			</a>
@@ -249,7 +251,9 @@ const Hero = ({ siteContent, t }: { siteContent: SiteContent; t: TranslationTree
 			</div>
 			<div className="hero-photo-shade" aria-hidden="true" />
 			<div className="hero-copy">
-				<div className="hero-kicker">{t.hero.eyebrow}</div>
+				<div className="hero-kicker">
+					<bdi dir="ltr">{t.hero.eyebrow}</bdi>
+				</div>
 				<h1 className="hero-title">
 					{t.hero.titleLines.map((line) => (
 						<span key={line}>{line}</span>
@@ -300,7 +304,9 @@ const About = ({ t }: { t: TranslationTree }) => (
 				<Image alt="Boutique Vape & More" loading="lazy" src="/assets/STORE.png" width={1254} height={1254} />
 			</div>
 			<div className="about-content">
-				<div className="section-label">Vape & More</div>
+				<div className="section-label">
+					<bdi dir="ltr">Vape & More</bdi>
+				</div>
 				<h2 className="about-title">{t.about.title}</h2>
 				<p className="about-lead">
 					<strong>{t.about.lead}</strong>
@@ -336,7 +342,9 @@ const Brands = ({ brands, language, t }: { brands: Brand[]; language: LanguageCo
 							/>
 						</div>
 						<div className="brand-dark-content">
-							<h3>{copy.headline || brand.label}</h3>
+							<h3>
+								<bdi dir="auto">{copy.headline || brand.label}</bdi>
+							</h3>
 							<p>{copy.copy}</p>
 						</div>
 					</article>
@@ -412,7 +420,9 @@ const Af15kOffer = ({ language, phone }: { language: LanguageCode; phone: string
 		<section className="promo-packs af15k-offer reveal visible" id="promotion" aria-labelledby="af15k-title">
 			<header className="af15k-heading">
 				<div className="section-kicker">{copy.kicker}</div>
-				<h2 id="af15k-title">Al Fakher Crown Bar</h2>
+				<h2 id="af15k-title">
+					<bdi dir="ltr">Al Fakher Crown Bar</bdi>
+				</h2>
 				<p className="promo-intro">{copy.subtitle}</p>
 			</header>
 			<div className="af15k-card">
@@ -463,7 +473,9 @@ const Af15kOffer = ({ language, phone }: { language: LanguageCode; phone: string
 										onClick={() => setSelectedFlavour(flavour.name)}
 									>
 										<span className="af15k-fruit-photo" style={{ backgroundPosition }} aria-hidden="true" />
-										<span className="af15k-flavour-name">{flavour.name}</span>
+										<span className="af15k-flavour-name">
+											<bdi dir="ltr">{flavour.name}</bdi>
+										</span>
 										<span className="af15k-stock">{copy.available}</span>
 									</button>
 								</li>
@@ -471,8 +483,8 @@ const Af15kOffer = ({ language, phone }: { language: LanguageCode; phone: string
 						})}
 					</ul>
 					<div className="af15k-price">
-						<del>230 DH</del>
-						<strong>200 DH</strong>
+						<del dir="ltr">230 DH</del>
+						<strong dir="ltr">200 DH</strong>
 					</div>
 					<WhatsAppOrderButton phone={phone} message={message} label={copy.order} />
 				</div>
@@ -507,14 +519,18 @@ const Contact = ({ siteContent, t }: { siteContent: SiteContent; t: TranslationT
 					<MailIcon />
 				</span>
 				<div className="social-name">{t.contact.email}</div>
-				<div className="social-handle">{siteContent.email}</div>
+				<div className="social-handle">
+					<bdi dir="ltr">{siteContent.email}</bdi>
+				</div>
 			</a>
 			<a className="social-card" href={instagramUrl} rel="noopener noreferrer" target="_blank">
 				<span aria-hidden="true" className="social-logo">
 					<InstagramIcon />
 				</span>
 				<div className="social-name">Instagram</div>
-				<div className="social-handle">@vapeandmore.official</div>
+				<div className="social-handle">
+					<bdi dir="ltr">@vapeandmore.official</bdi>
+				</div>
 			</a>
 		</div>
 		<p className="legal-note">{t.legal}</p>
@@ -593,13 +609,15 @@ const Footer = ({
 						<h4>{footer.brands}</h4>
 						{brandLinks.map((brand) => (
 							<a href={homeAnchor('nos-marques', catalogOnly)} key={brand.key}>
-								{brand.label}
+								<bdi dir="auto">{brand.label}</bdi>
 							</a>
 						))}
 					</div>
 					<div className="footer-col">
 						<h4>{footer.contact}</h4>
-						<a href={`mailto:${siteContent.email}`}>{siteContent.email}</a>
+						<a href={`mailto:${siteContent.email}`}>
+							<bdi dir="ltr">{siteContent.email}</bdi>
+						</a>
 						<a
 							className="phone-number"
 							dir="ltr"
@@ -633,6 +651,7 @@ const Footer = ({
 							id="footerNewsletterEmail"
 							name="email"
 							type="email"
+							dir="auto"
 							autoComplete="email"
 							required
 							placeholder={footer.newsletterPlaceholder}
@@ -690,7 +709,7 @@ export const VapeSite = ({ siteContent, catalogOnly = false }: VapeSiteProps) =>
 	return (
 		<>
 			{catalogOnly ? null : <AgeGate t={t} />}
-			<div className="content">
+			<div className="content" lang={language} dir={language === 'ar' ? 'rtl' : 'ltr'}>
 				<Header language={language} t={t} catalogOnly={catalogOnly} onLanguageChange={handleLanguageChange} />
 				<Marquee t={t} />
 				{catalogOnly ? (

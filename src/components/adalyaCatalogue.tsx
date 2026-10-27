@@ -115,8 +115,10 @@ export const AdalyaCatalogue = ({ language, phone }: { language: LanguageCode; p
 							<p className={styles.eyebrow}>
 								VAPE & MORE <span aria-hidden="true">/</span> {copy.kicker}
 							</p>
-							<h1 id="catalogue-title" className={styles.title} dir="ltr">
-								ADALYA <span>15K</span>
+							<h1 id="catalogue-title" className={styles.title}>
+								<bdi dir="ltr">
+									ADALYA <span>15K</span>
+								</bdi>
 							</h1>
 							<p className={styles.introDescription}>{copy.intro}</p>
 						</div>
@@ -145,6 +147,7 @@ export const AdalyaCatalogue = ({ language, phone }: { language: LanguageCode; p
 							<input
 								ref={searchRef}
 								type="search"
+								dir="auto"
 								placeholder={copy.searchPlaceholder}
 								autoComplete="off"
 								value={query}
@@ -208,10 +211,12 @@ export const AdalyaCatalogue = ({ language, phone }: { language: LanguageCode; p
 											</span>
 										</button>
 										<div className={styles.info}>
-											<p className={styles.meta} dir="ltr">
-												ADALYA / 15K
+											<p className={styles.meta}>
+												<bdi dir="ltr">ADALYA / 15K</bdi>
 											</p>
-											<h3 dir="auto">{product.name}</h3>
+											<h3>
+												<bdi dir="ltr">{product.name}</bdi>
+											</h3>
 											<p className={styles.description}>{product.descriptions[language]}</p>
 											{orderButton(product.name)}
 										</div>
@@ -259,7 +264,8 @@ export const AdalyaCatalogue = ({ language, phone }: { language: LanguageCode; p
 				onKeyDown={(event) => {
 					if (event.key === 'ArrowRight' || event.key === 'ArrowLeft') {
 						event.preventDefault();
-						changePhoto(event.key === 'ArrowRight' ? 1 : -1);
+						const offset = event.key === 'ArrowRight' ? 1 : -1;
+						changePhoto(language === 'ar' ? -offset : offset);
 					}
 				}}
 			>
@@ -278,16 +284,18 @@ export const AdalyaCatalogue = ({ language, phone }: { language: LanguageCode; p
 						/>
 					</div>
 					<div className={styles.dialogDetails}>
-						<p className={styles.eyebrow} dir="ltr">
-							ADALYA / 15K
+						<p className={styles.eyebrow}>
+							<bdi dir="ltr">ADALYA / 15K</bdi>
 						</p>
-						<h2 id="catalogue-photo-title" dir="auto">
-							{selectedProduct.name}
+						<h2 id="catalogue-photo-title">
+							<bdi dir="ltr">{selectedProduct.name}</bdi>
 						</h2>
 						<p className={styles.description}>{selectedProduct.descriptions[language]}</p>
 						{orderButton(selectedProduct.name)}
-						<span className={styles.dialogNumber} dir="ltr">
-							{String(currentPhoto + 1).padStart(2, '0')} / {total}
+						<span className={styles.dialogNumber}>
+							<bdi dir="ltr">
+								{String(currentPhoto + 1).padStart(2, '0')} / {total}
+							</bdi>
 						</span>
 					</div>
 					<div className={styles.dialogNavigation}>
