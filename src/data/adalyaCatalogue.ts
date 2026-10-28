@@ -10,6 +10,42 @@ type AdalyaProduct = {
 
 export const adalyaProducts = [
 	{
+		id: 'african-crush',
+		name: 'African Crush',
+		accent: '#b8d58a',
+		group: 'ag',
+		descriptions: {
+			fr: 'African Crush associe des notes de raisin, de myrtille, de kiwi, de mangue, de fruit de cactus et de pêche. La menthe et une note glacée complètent ce mélange fruité.',
+			en: 'African Crush combines grape, blueberry, kiwi, mango, cactus fruit and peach notes. Mint and an icy note complete this fruity blend.',
+			es: 'African Crush combina notas de uva, arándano, kiwi, mango, fruto de cactus y melocotón. La menta y una nota helada completan esta mezcla afrutada.',
+			ar: 'مزيج من نكهات العنب والتوت الأزرق والكيوي والمانجو وثمار الصبار والخوخ، تكمله نكهة النعناع ولمسة باردة.',
+		},
+	},
+	{
+		id: 'berlin-nights',
+		name: 'Berlin Nights',
+		accent: '#f1b08c',
+		group: 'ag',
+		descriptions: {
+			fr: 'Berlin Nights associe des notes de pêche et de menthe. Son profil combine une composante fruitée et une note menthée.',
+			en: 'Berlin Nights pairs peach and mint notes. Its profile combines a fruity element with a minty note.',
+			es: 'Berlin Nights combina notas de melocotón y menta. Su perfil une un componente afrutado con una nota mentolada.',
+			ar: 'مزيج من نكهتي الخوخ والنعناع، يجمع مذاق الفاكهة مع لمسة نعناعية.',
+		},
+	},
+	{
+		id: 'black-box',
+		name: 'Black Box',
+		accent: '#b4a0db',
+		group: 'ag',
+		descriptions: {
+			fr: 'Black Box associe des notes d’açaï, de guarana et de citron. La menthe complète ce mélange aromatique.',
+			en: 'Black Box combines açaí, guarana and lemon notes. Mint completes this flavour blend.',
+			es: 'Black Box combina notas de açaí, guaraná y limón. La menta completa esta mezcla de sabores.',
+			ar: 'مزيج من نكهات توت الآساي والغوارانا والليمون، تكمله لمسة من النعناع.',
+		},
+	},
+	{
 		id: 'blue-ice',
 		name: 'Blue Ice',
 		accent: '#84c9fc',
@@ -27,10 +63,22 @@ export const adalyaProducts = [
 		accent: '#ffb36e',
 		group: 'ag',
 		descriptions: {
-			fr: 'Cactus Splash présente un arôme de fruit de cactus. Une note glacée complète ce profil fruité.',
-			en: 'Cactus Splash features a cactus fruit flavour. An icy note completes this fruity profile.',
-			es: 'Cactus Splash presenta un aroma de fruto de cactus. Una nota helada completa este perfil afrutado.',
+			fr: 'Cactus Splash présente un arôme de fruit de cactus. Une note glacée complète son profil.',
+			en: 'Cactus Splash features a cactus fruit flavour. An icy note completes its profile.',
+			es: 'Cactus Splash presenta un aroma de fruto de cactus. Una nota helada completa su perfil.',
 			ar: 'نكهة ثمار الصبار مع لمسة باردة تكمل المذاق الفاكهي.',
+		},
+	},
+	{
+		id: 'chewing-gum-melon',
+		name: 'Chewing Gum Melon',
+		accent: '#e3c58b',
+		group: 'ag',
+		descriptions: {
+			fr: 'Chewing Gum Melon associe le melon et le chewing-gum. Une note de menthe complète le mélange.',
+			en: 'Chewing Gum Melon combines melon and chewing gum flavours. A mint note completes the blend.',
+			es: 'Chewing Gum Melon combina melón y chicle. Una nota de menta completa la mezcla.',
+			ar: 'مزيج من نكهتي الشمام والعلكة، تكمله لمسة من النعناع.',
 		},
 	},
 	{
@@ -43,6 +91,42 @@ export const adalyaProducts = [
 			en: 'Cola Dragon pairs cola and energy drink notes. Its flavour profile draws on these two drink flavours.',
 			es: 'Cola Dragon combina notas de cola y de bebida energética. Su perfil aromático se inspira en estos dos sabores de bebidas.',
 			ar: 'تجمع هذه النكهة بين مذاق الكولا ومشروبات الطاقة.',
+		},
+	},
+	{
+		id: 'double-melon-ice',
+		name: 'Double Melon Ice',
+		accent: '#d0d48b',
+		group: 'ag',
+		descriptions: {
+			fr: 'Double Melon Ice réunit le melon et la pastèque. Une note glacée complète cette association fruitée.',
+			en: 'Double Melon Ice brings together melon and watermelon. An icy note completes this fruity combination.',
+			es: 'Double Melon Ice reúne melón y sandía. Una nota helada completa esta combinación afrutada.',
+			ar: 'مزيج من نكهتي الشمام والبطيخ مع لمسة باردة.',
+		},
+	},
+	{
+		id: 'falim',
+		name: 'Falim',
+		accent: '#d8d4c3',
+		group: 'ag',
+		descriptions: {
+			fr: 'Falim présente un arôme de chewing-gum. Son profil appartient à la famille des saveurs de confiserie.',
+			en: 'Falim features a chewing gum flavour. Its profile belongs to the confectionery flavour family.',
+			es: 'Falim presenta un aroma de chicle. Su perfil pertenece a la familia de sabores de golosinas.',
+			ar: 'نكهة العلكة، ضمن مجموعة نكهات الحلويات.',
+		},
+	},
+	{
+		id: 'falim-red',
+		name: 'Falim Red',
+		accent: '#e9a2ac',
+		group: 'ag',
+		descriptions: {
+			fr: 'Falim Red associe le chewing-gum à des notes de fraise. Son profil combine une base de confiserie et une composante fruitée.',
+			en: 'Falim Red pairs chewing gum with strawberry notes. Its profile combines a confectionery base with a fruity element.',
+			es: 'Falim Red combina chicle con notas de fresa. Su perfil une una base de golosina con un componente afrutado.',
+			ar: 'مزيج من نكهتي العلكة والفراولة، يجمع مذاق الحلويات مع نكهة الفاكهة.',
 		},
 	},
 	{
@@ -166,6 +250,30 @@ export const adalyaProducts = [
 		},
 	},
 	{
+		id: 'pineapple-slice',
+		name: 'Pineapple Slice',
+		accent: '#e8d27d',
+		group: 'nz',
+		descriptions: {
+			fr: 'Pineapple Slice présente un arôme d’ananas. Une note glacée complète ce profil fruité.',
+			en: 'Pineapple Slice features a pineapple flavour. An icy note completes this fruity profile.',
+			es: 'Pineapple Slice presenta un aroma de piña. Una nota helada completa este perfil afrutado.',
+			ar: 'نكهة الأناناس مع لمسة باردة تكمل المذاق الفاكهي.',
+		},
+	},
+	{
+		id: 'punkman',
+		name: 'Punkman',
+		accent: '#de9fbe',
+		group: 'nz',
+		descriptions: {
+			fr: 'Punkman réunit des arômes de fraise, de cerise et de myrtille. Une note glacée accompagne ce mélange fruité.',
+			en: 'Punkman brings together strawberry, cherry and blueberry flavours. An icy note accompanies this fruity blend.',
+			es: 'Punkman reúne aromas de fresa, cereza y arándano. Una nota helada acompaña esta mezcla afrutada.',
+			ar: 'مزيج من نكهات الفراولة والكرز والتوت الأزرق مع لمسة باردة.',
+		},
+	},
+	{
 		id: 'strawberry-cherry',
 		name: 'Strawberry Cherry',
 		accent: '#e98c9c',
@@ -202,6 +310,18 @@ export const adalyaProducts = [
 		},
 	},
 	{
+		id: 'swiss-bonbon',
+		name: 'Swiss Bonbon',
+		accent: '#e5cc98',
+		group: 'nz',
+		descriptions: {
+			fr: 'Swiss Bonbon présente un arôme de bonbon suisse. Son profil appartient à la famille des saveurs de confiserie.',
+			en: 'Swiss Bonbon features a Swiss candy flavour. Its profile belongs to the confectionery flavour family.',
+			es: 'Swiss Bonbon presenta un aroma de caramelo suizo. Su perfil pertenece a la familia de sabores de golosinas.',
+			ar: 'نكهة الحلوى السويسرية، ضمن مجموعة نكهات الحلويات.',
+		},
+	},
+	{
 		id: 'two-apple',
 		name: 'Two Apple',
 		accent: '#afc976',
@@ -223,6 +343,18 @@ export const adalyaProducts = [
 			en: 'Very Berry features a blend of blackberry notes. An icy effect completes its flavour profile.',
 			es: 'Very Berry presenta una mezcla de notas de moras. Un efecto helado completa su perfil aromático.',
 			ar: 'مزيج من نكهات التوت الأسود مع لمسة باردة.',
+		},
+	},
+	{
+		id: 'watermelon-ice',
+		name: 'Watermelon Ice',
+		accent: '#ef9b9f',
+		group: 'nz',
+		descriptions: {
+			fr: 'Watermelon Ice associe un arôme de pastèque à une note glacée. Son profil combine une base fruitée et une sensation de fraîcheur.',
+			en: 'Watermelon Ice pairs a watermelon flavour with an icy note. Its profile combines a fruity base with a cooling sensation.',
+			es: 'Watermelon Ice combina un aroma de sandía con una nota helada. Su perfil une una base afrutada con una sensación de frescor.',
+			ar: 'نكهة البطيخ مع لمسة باردة، تجمع بين المذاق الفاكهي والإحساس بالانتعاش.',
 		},
 	},
 ] satisfies AdalyaProduct[];
