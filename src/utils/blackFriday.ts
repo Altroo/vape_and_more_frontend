@@ -1,6 +1,6 @@
-// The ten-day campaign uses Morocco time and one shared deadline for every visitor.
+// The campaign runs through November 30 in Morocco, ending at midnight on December 1.
 export const blackFridayStartsAt = Date.parse('2026-11-17T00:00:00+01:00');
-export const blackFridayEndsAt = blackFridayStartsAt + 10 * 24 * 60 * 60 * 1000;
+export const blackFridayEndsAt = Date.parse('2026-12-01T00:00:00+01:00');
 
 export const getBlackFridayCountdown = (now: number) => {
 	const remaining = Math.max(0, Math.ceil((blackFridayEndsAt - Math.max(now, blackFridayStartsAt)) / 1000));

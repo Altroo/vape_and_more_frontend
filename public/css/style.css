@@ -5861,6 +5861,10 @@ body.is-rtl .af15k-flavour-item{
   margin:0;
 }
 
+.vm-marquee-group > .vm-marquee-promotion{
+  color:#ff4d4f !important;
+}
+
 @keyframes af15k-reflection-sweep{
   0%,15%{transform:translateX(0) skewX(-18deg);opacity:0}
   23%{opacity:.76}

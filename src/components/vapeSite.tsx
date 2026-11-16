@@ -218,7 +218,12 @@ const Marquee = ({ t }: { t: TranslationTree }) => (
 			{[0, 1].map((copy) => (
 				<div className="vm-marquee-group" key={copy} aria-hidden={copy === 1 ? true : undefined}>
 					{[t.tickerAge, t.tickerBlackFriday, t.tickerAge, t.tickerBlackFriday].map((message, index) => (
-						<span key={index} dir="auto" aria-hidden={index > 1 ? true : undefined}>
+						<span
+							key={index}
+							className={message === t.tickerBlackFriday ? 'vm-marquee-promotion' : undefined}
+							dir="auto"
+							aria-hidden={index > 1 ? true : undefined}
+						>
 							{message}
 						</span>
 					))}

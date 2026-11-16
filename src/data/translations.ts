@@ -36,8 +36,8 @@ export const translations = {
 			secondaryCta: 'Voir les promotions',
 			countdown: {
 				title: 'Black Friday',
-				startsOn: '10 jours d’offres à partir du 17 novembre',
-				endsIn: 'Fin des offres dans',
+				startsOn: 'Offres du 17 au 30 novembre inclus',
+				endsIn: 'Offres jusqu’au 30 novembre inclus. Fin dans',
 				ended: 'Les offres Black Friday sont terminées.',
 				days: 'Jours',
 				hours: 'Heures',
@@ -163,8 +163,8 @@ export const translations = {
 			secondaryCta: 'اكتشف العروض',
 			countdown: {
 				title: 'الجمعة السوداء',
-				startsOn: 'عروض لمدة 10 أيام ابتداءً من 17 نوفمبر',
-				endsIn: 'تنتهي العروض خلال',
+				startsOn: 'العروض من 17 نوفمبر حتى نهاية يوم 30 نوفمبر',
+				endsIn: 'العروض مستمرة حتى نهاية يوم 30 نوفمبر. تنتهي خلال',
 				ended: 'انتهت عروض الجمعة السوداء.',
 				days: 'أيام',
 				hours: 'ساعات',
@@ -287,8 +287,8 @@ export const translations = {
 			secondaryCta: 'View promotions',
 			countdown: {
 				title: 'Black Friday',
-				startsOn: '10 days of offers starting November 17',
-				endsIn: 'Offers end in',
+				startsOn: 'Offers from November 17 through November 30',
+				endsIn: 'Offers through November 30. Time remaining',
 				ended: 'Black Friday offers have ended.',
 				days: 'Days',
 				hours: 'Hours',
@@ -414,8 +414,8 @@ export const translations = {
 			secondaryCta: 'Ver promociones',
 			countdown: {
 				title: 'Black Friday',
-				startsOn: '10 días de ofertas a partir del 17 de noviembre',
-				endsIn: 'Las ofertas terminan en',
+				startsOn: 'Ofertas del 17 al 30 de noviembre, ambos incluidos',
+				endsIn: 'Ofertas hasta el 30 de noviembre incluido. Terminan en',
 				ended: 'Las ofertas de Black Friday han terminado.',
 				days: 'Días',
 				hours: 'Horas',
