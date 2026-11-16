@@ -47,8 +47,26 @@ export const ProductCatalogue = ({
 	const catalogue = catalogues[brand];
 	const products: CatalogueProduct[] = catalogue.products;
 	const copy = translations[language].catalog;
+	const promotionalPrice =
+		brand === 'al-fakher-8k' ? (
+			<div className={styles.promotionalPrice} role="group" aria-label={translations[language].common.price}>
+				<div className={styles.originalPrice}>
+					<span>{copy.originalPrice}</span>
+					<del dir="ltr">180 MAD</del>
+				</div>
+				<strong dir="ltr" aria-label={`${copy.promotionalPrice}: 100 MAD`}>
+					100 MAD
+				</strong>
+			</div>
+		) : null;
+	const promotionBadge =
+		brand === 'al-fakher-8k' ? (
+			<span className={styles.discountBadge} dir="ltr">
+				-45 %
+			</span>
+		) : null;
 	const orderButton = (name: string) => {
-		const productName = `ADALYA 15K - ${name}`;
+		const productName = `${catalogue.name} - ${name}`;
 		return (
 			<WhatsAppOrderButton
 				phone={phone}
@@ -221,7 +239,13 @@ export const ProductCatalogue = ({
 												height={1254}
 												loading={index < 4 ? 'eager' : 'lazy'}
 											/>
-											<span className={styles.number} aria-hidden="true">
+											{promotionBadge}
+											<span
+												className={
+													brand === 'al-fakher-8k' ? `${styles.number} ${styles.numberWithDiscount}` : styles.number
+												}
+												aria-hidden="true"
+											>
 												{String(productIndex + 1).padStart(2, '0')}
 											</span>
 											<span className={styles.expand} aria-hidden="true">
@@ -236,6 +260,7 @@ export const ProductCatalogue = ({
 												<bdi dir="ltr">{product.name}</bdi>
 											</h3>
 											<p className={styles.description}>{product.descriptions[language]}</p>
+											{promotionalPrice}
 											{orderButton(product.name)}
 										</div>
 									</article>
@@ -288,7 +313,12 @@ export const ProductCatalogue = ({
 				}}
 			>
 				<div className={styles.dialogContent}>
-					<button className={styles.close} type="button" aria-label={copy.close} onClick={closePhoto}>
+					<button
+						className={brand === 'al-fakher-8k' ? `${styles.close} ${styles.closeWithDiscount}` : styles.close}
+						type="button"
+						aria-label={copy.close}
+						onClick={closePhoto}
+					>
 						<svg viewBox="0 0 24 24" aria-hidden="true">
 							<path d="m6 6 12 12M6 18 18 6" />
 						</svg>
@@ -300,6 +330,7 @@ export const ProductCatalogue = ({
 							width={1254}
 							height={1254}
 						/>
+						{promotionBadge}
 					</div>
 					<div className={styles.dialogDetails}>
 						<p className={styles.eyebrow}>
@@ -309,6 +340,7 @@ export const ProductCatalogue = ({
 							<bdi dir="ltr">{selectedProduct.name}</bdi>
 						</h2>
 						<p className={styles.description}>{selectedProduct.descriptions[language]}</p>
+						{promotionalPrice}
 						{orderButton(selectedProduct.name)}
 						<span className={styles.dialogNumber}>
 							<bdi dir="ltr">

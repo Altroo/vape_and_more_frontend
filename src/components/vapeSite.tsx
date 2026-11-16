@@ -3,6 +3,7 @@
 import { type SubmitEvent, useEffect, useState, useSyncExternalStore } from 'react';
 import Image from 'next/image';
 import { languages, translations, type LanguageCode } from '@/data/translations';
+import { catalogues } from '@/data/catalogue';
 import {
 	ageStorageKey,
 	langStorageKey,
@@ -17,6 +18,7 @@ import {
 import type { Af15kFamily, Af15kFlavour, Brand, Shop, SiteContent, VapeSiteProps } from '@/types/site';
 import { ProductCatalogue } from '@/components/productCatalogue';
 import { CatalogueOverview } from '@/components/catalogueOverview';
+import { BlackFridayCountdown } from '@/components/blackFridayCountdown';
 import { WhatsAppOrderButton } from '@/components/whatsAppOrderButton';
 import { waHref } from '@/utils/whatsapp';
 
@@ -215,8 +217,8 @@ const Marquee = ({ t }: { t: TranslationTree }) => (
 		<div className="vm-marquee-track">
 			{[0, 1].map((copy) => (
 				<div className="vm-marquee-group" key={copy} aria-hidden={copy === 1 ? true : undefined}>
-					{[t.tickerAge].map((message, index) => (
-						<span key={index} dir="auto">
+					{[t.tickerAge, t.tickerBlackFriday, t.tickerAge, t.tickerBlackFriday].map((message, index) => (
+						<span key={index} dir="auto" aria-hidden={index > 1 ? true : undefined}>
 							{message}
 						</span>
 					))}
@@ -261,8 +263,9 @@ const Hero = ({ siteContent, t }: { siteContent: SiteContent; t: TranslationTree
 					))}
 				</h1>
 				<p className="hero-desc">{t.hero.description}</p>
+				<BlackFridayCountdown copy={t.hero.countdown} />
 				<div className="hero-cta">
-					<a className="hero-aurora-button" href="#promotion">
+					<a className="hero-aurora-button" href={catalogues['al-fakher-8k'].path}>
 						<span>{t.hero.primaryCta}</span>
 					</a>
 				</div>
@@ -569,7 +572,6 @@ const Footer = ({
 	const [email, setEmail] = useState('');
 	const [status, setStatus] = useState('');
 	const [isError, setIsError] = useState(false);
-	const brandLinks = siteContent.brands.filter((brand) => !isNerdBrand(brand));
 
 	const submitNewsletter = (event: SubmitEvent<HTMLFormElement>) => {
 		event.preventDefault();
@@ -608,9 +610,9 @@ const Footer = ({
 					</div>
 					<div className="footer-col">
 						<h4>{footer.brands}</h4>
-						{brandLinks.map((brand) => (
-							<a href={homeAnchor('nos-marques', catalogOnly)} key={brand.key}>
-								<bdi dir="auto">{brand.label}</bdi>
+						{Object.entries(catalogues).map(([key, catalogue]) => (
+							<a href={catalogue.path} key={key}>
+								<bdi dir="ltr">{catalogue.name}</bdi>
 							</a>
 						))}
 					</div>

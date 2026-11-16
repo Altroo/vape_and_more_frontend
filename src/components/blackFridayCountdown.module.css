@@ -1,0 +1,60 @@
+.countdown {
+	width: min(100%, 440px);
+	margin-top: 2rem;
+	padding: 1.1rem 1.25rem;
+	border: 1px solid rgb(0 255 208 / 30%);
+	border-radius: 18px;
+	background: rgb(5 12 18 / 80%);
+	color: #fff;
+}
+
+.title {
+	margin: 0;
+	color: #00ffd0;
+	font-size: 0.8rem;
+	font-weight: 700;
+	letter-spacing: 0.12em;
+	text-transform: uppercase;
+}
+
+.message {
+	margin: 0.4rem 0 1rem;
+	font-size: 0.85rem;
+	line-height: 1.5;
+}
+
+.units {
+	display: grid;
+	grid-template-columns: repeat(4, minmax(0, 1fr));
+	gap: 0.6rem;
+}
+
+.unit {
+	display: grid;
+	gap: 0.3rem;
+	padding: 0.65rem 0.2rem;
+	border: 1px solid rgb(255 255 255 / 12%);
+	border-radius: 10px;
+	background: rgb(255 255 255 / 4%);
+	text-align: center;
+}
+
+.unit strong {
+	font-size: clamp(1.5rem, 5vw, 2rem);
+	font-variant-numeric: tabular-nums;
+	line-height: 1;
+}
+
+.unit span {
+	font-size: 0.7rem;
+}
+
+@media (max-width: 380px) {
+	.countdown {
+		padding: 1rem 0.75rem;
+	}
+
+	.units {
+		gap: 0.4rem;
+	}
+}

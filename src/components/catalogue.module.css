@@ -358,6 +358,34 @@
 	font-size: 10px;
 }
 
+.photo .numberWithDiscount {
+	inset-inline-start: auto;
+	left: auto;
+	right: 10px;
+}
+
+.discountBadge {
+	position: absolute;
+	top: 10px;
+	left: 10px;
+	z-index: 1;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 30px;
+	padding: 5px 10px;
+	border: 1px solid rgb(255 255 255 / 25%);
+	border-radius: 999px;
+	background: #d51e31;
+	box-shadow: 0 2px 8px rgb(0 0 0 / 18%);
+	color: #fff;
+	font-size: 12px;
+	font-weight: 800;
+	line-height: 1;
+	white-space: nowrap;
+	pointer-events: none;
+}
+
 .expand {
 	position: absolute;
 	bottom: 10px;
@@ -393,6 +421,53 @@
 	padding: 12px 10px;
 	white-space: normal;
 	line-height: 1.4;
+}
+
+.promotionalPrice {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: flex-end;
+	gap: 8px 12px;
+	margin-top: 14px;
+}
+
+.originalPrice {
+	display: grid;
+	gap: 4px;
+}
+
+.originalPrice > span {
+	color: var(--text-soft);
+	font-size: 11px;
+}
+
+.originalPrice del {
+	position: relative;
+	color: #d9e2ec;
+	font-size: 18px;
+	font-weight: 600;
+	font-variant-numeric: tabular-nums;
+	text-decoration: none;
+	white-space: nowrap;
+}
+
+.originalPrice del::after {
+	content: '';
+	position: absolute;
+	top: 50%;
+	left: -2px;
+	right: -2px;
+	height: 1px;
+	background: rgb(217 226 236 / 65%);
+	transform: rotate(-12deg);
+	pointer-events: none;
+}
+
+.promotionalPrice strong {
+	color: #ff4d4f;
+	font-size: 22px;
+	font-weight: 700;
+	white-space: nowrap;
 }
 
 .meta {
@@ -528,9 +603,16 @@
 }
 
 .dialogPhoto {
+	position: relative;
 	display: flex;
 	justify-content: center;
 	background: #fbfbfb;
+}
+
+.dialogContent .closeWithDiscount {
+	inset-inline-end: auto;
+	left: auto;
+	right: 12px;
 }
 
 .dialogPhoto img {

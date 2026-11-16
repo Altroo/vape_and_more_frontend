@@ -5845,8 +5845,20 @@ body.is-rtl .af15k-flavour-item{
   display:flex;
   align-items:center;
   flex-shrink:0;
+  justify-content:space-around;
+  min-width:100vw;
+}
+
+.vm-marquee-group > span{
+  display:inline-flex;
+  align-items:center;
+  flex-shrink:0;
   gap:3rem;
-  padding-right:3rem;
+  padding:0 1.5rem !important;
+}
+
+.vm-marquee-group > span::after{
+  margin:0;
 }
 
 @keyframes af15k-reflection-sweep{
