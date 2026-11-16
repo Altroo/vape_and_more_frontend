@@ -236,7 +236,7 @@ export const ProductCatalogue = ({
 												<bdi dir="ltr">{product.name}</bdi>
 											</h3>
 											<p className={styles.description}>{product.descriptions[language]}</p>
-											{brand === 'adalya' && orderButton(product.name)}
+											{orderButton(product.name)}
 										</div>
 									</article>
 								);
@@ -309,7 +309,7 @@ export const ProductCatalogue = ({
 							<bdi dir="ltr">{selectedProduct.name}</bdi>
 						</h2>
 						<p className={styles.description}>{selectedProduct.descriptions[language]}</p>
-						{brand === 'adalya' && orderButton(selectedProduct.name)}
+						{orderButton(selectedProduct.name)}
 						<span className={styles.dialogNumber}>
 							<bdi dir="ltr">
 								{String(currentPhoto + 1).padStart(2, '0')} / {total}
