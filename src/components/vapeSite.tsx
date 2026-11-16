@@ -215,7 +215,7 @@ const Marquee = ({ t }: { t: TranslationTree }) => (
 		<div className="vm-marquee-track">
 			{[0, 1].map((copy) => (
 				<div className="vm-marquee-group" key={copy} aria-hidden={copy === 1 ? true : undefined}>
-					{[t.ticker, t.tickerAge, t.tickerArrivals, t.tickerAge].map((message, index) => (
+					{[t.tickerAge].map((message, index) => (
 						<span key={index} dir="auto">
 							{message}
 						</span>
