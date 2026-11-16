@@ -2,10 +2,12 @@
 
 import { type CSSProperties, useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
-import { adalyaProducts } from '@/data/adalyaCatalogue';
+import { catalogues } from '@/data/catalogue';
 import { translations, type LanguageCode } from '@/data/translations';
+import type { CatalogueBrand, CatalogueProduct } from '@/types/catalogue';
 import { WhatsAppOrderButton } from '@/components/whatsAppOrderButton';
-import styles from './adalyaCatalogue.module.css';
+import { CatalogueNavigation } from '@/components/catalogueNavigation';
+import styles from './catalogue.module.css';
 
 const alphabetFilters = [
 	{ key: 'ag', label: 'A - G' },
@@ -33,7 +35,17 @@ const ExpandIcon = () => (
 	</svg>
 );
 
-export const AdalyaCatalogue = ({ language, phone }: { language: LanguageCode; phone: string }) => {
+export const ProductCatalogue = ({
+	language,
+	phone,
+	brand,
+}: {
+	language: LanguageCode;
+	phone: string;
+	brand: CatalogueBrand;
+}) => {
+	const catalogue = catalogues[brand];
+	const products: CatalogueProduct[] = catalogue.products;
 	const copy = translations[language].catalog;
 	const orderButton = (name: string) => {
 		const productName = `ADALYA 15K - ${name}`;
@@ -53,14 +65,14 @@ export const AdalyaCatalogue = ({ language, phone }: { language: LanguageCode; p
 	const [isPhotoOpen, setIsPhotoOpen] = useState(false);
 	const searchRef = useRef<HTMLInputElement>(null);
 	const dialogRef = useRef<HTMLDialogElement>(null);
-	const total = adalyaProducts.length;
-	const filteredProducts = adalyaProducts.filter(
+	const total = products.length;
+	const filteredProducts = products.filter(
 		(product) =>
 			(activeFilter === 'all' || product.group === activeFilter) &&
 			normalize(`${product.name} ${product.descriptions[language]}`).includes(normalize(query)),
 	);
-	const selectedProduct = adalyaProducts[currentPhoto];
-	const photoAlt = (name: string) => copy.imageAlt.replace('{product}', name);
+	const selectedProduct = products[currentPhoto];
+	const photoAlt = (name: string) => copy.imageAlt.replace('{brand}', catalogue.name).replace('{product}', name);
 	const resultStatus = copy.resultStatus
 		.replace('{count}', String(filteredProducts.length))
 		.replace('{total}', String(total));
@@ -113,14 +125,19 @@ export const AdalyaCatalogue = ({ language, phone }: { language: LanguageCode; p
 					<div className={styles.intro}>
 						<div>
 							<p className={styles.eyebrow}>
-								VAPE & MORE <span aria-hidden="true">/</span> {copy.kicker}
+								<bdi dir="ltr">VAPE & MORE</bdi> <span aria-hidden="true">/</span> {copy.kicker}
 							</p>
 							<h1 id="catalogue-title" className={styles.title}>
-								<bdi dir="ltr">
-									ADALYA <span>15K</span>
-								</bdi>
+								{copy.kicker}
 							</h1>
-							<p className={styles.introDescription}>{copy.intro}</p>
+							<h2 className={styles.brandTitle}>
+								<bdi dir="ltr">{catalogue.name}</bdi>
+							</h2>
+							<p className={styles.introDescription}>
+								{copy.intro.split('{brand}')[0]}
+								<bdi dir="ltr">{catalogue.name}</bdi>
+								{copy.intro.split('{brand}')[1]}
+							</p>
 						</div>
 						<div className={styles.edition}>
 							<p className={styles.eyebrow}>
@@ -132,6 +149,7 @@ export const AdalyaCatalogue = ({ language, phone }: { language: LanguageCode; p
 							</strong>
 						</div>
 					</div>
+					<CatalogueNavigation language={language} brand={brand} />
 
 					<div className={styles.heading}>
 						<div>
@@ -183,7 +201,7 @@ export const AdalyaCatalogue = ({ language, phone }: { language: LanguageCode; p
 					{filteredProducts.length > 0 ? (
 						<div className={styles.grid}>
 							{filteredProducts.map((product, index) => {
-								const productIndex = adalyaProducts.indexOf(product);
+								const productIndex = products.indexOf(product);
 								return (
 									<article
 										className={styles.card}
@@ -197,7 +215,7 @@ export const AdalyaCatalogue = ({ language, phone }: { language: LanguageCode; p
 											onClick={() => openPhoto(productIndex)}
 										>
 											<Image
-												src={`/assets/catalogue/adalya-15k/${product.id}.webp`}
+												src={`/assets/catalogue/${catalogue.imageDirectory}/${product.id}.webp`}
 												alt={photoAlt(product.name)}
 												width={1254}
 												height={1254}
@@ -212,13 +230,13 @@ export const AdalyaCatalogue = ({ language, phone }: { language: LanguageCode; p
 										</button>
 										<div className={styles.info}>
 											<p className={styles.meta}>
-												<bdi dir="ltr">ADALYA / 15K</bdi>
+												<bdi dir="ltr">{catalogue.name}</bdi>
 											</p>
 											<h3>
 												<bdi dir="ltr">{product.name}</bdi>
 											</h3>
 											<p className={styles.description}>{product.descriptions[language]}</p>
-											{orderButton(product.name)}
+											{brand === 'adalya' && orderButton(product.name)}
 										</div>
 									</article>
 								);
@@ -239,7 +257,7 @@ export const AdalyaCatalogue = ({ language, phone }: { language: LanguageCode; p
 					</p>
 					<div className={styles.end}>
 						<span />
-						ADALYA 15K / {total} {copy.references}
+						<bdi dir="ltr">{catalogue.name}</bdi> / {total} {copy.references}
 						<span />
 					</div>
 				</div>
@@ -277,7 +295,7 @@ export const AdalyaCatalogue = ({ language, phone }: { language: LanguageCode; p
 					</button>
 					<div className={styles.dialogPhoto}>
 						<Image
-							src={`/assets/catalogue/adalya-15k/${selectedProduct.id}.webp`}
+							src={`/assets/catalogue/${catalogue.imageDirectory}/${selectedProduct.id}.webp`}
 							alt={photoAlt(selectedProduct.name)}
 							width={1254}
 							height={1254}
@@ -285,13 +303,13 @@ export const AdalyaCatalogue = ({ language, phone }: { language: LanguageCode; p
 					</div>
 					<div className={styles.dialogDetails}>
 						<p className={styles.eyebrow}>
-							<bdi dir="ltr">ADALYA / 15K</bdi>
+							<bdi dir="ltr">{catalogue.name}</bdi>
 						</p>
 						<h2 id="catalogue-photo-title">
 							<bdi dir="ltr">{selectedProduct.name}</bdi>
 						</h2>
 						<p className={styles.description}>{selectedProduct.descriptions[language]}</p>
-						{orderButton(selectedProduct.name)}
+						{brand === 'adalya' && orderButton(selectedProduct.name)}
 						<span className={styles.dialogNumber}>
 							<bdi dir="ltr">
 								{String(currentPhoto + 1).padStart(2, '0')} / {total}

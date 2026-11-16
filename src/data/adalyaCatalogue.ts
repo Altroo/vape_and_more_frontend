@@ -1,12 +1,4 @@
-import type { LanguageCode } from '@/data/translations';
-
-type AdalyaProduct = {
-	id: string;
-	name: string;
-	accent: string;
-	group: 'ag' | 'hm' | 'nz';
-	descriptions: Record<LanguageCode, string>;
-};
+import type { CatalogueProduct } from '@/types/catalogue';
 
 export const adalyaProducts = [
 	{
@@ -357,4 +349,4 @@ export const adalyaProducts = [
 			ar: 'نكهة البطيخ مع لمسة باردة، تجمع بين المذاق الفاكهي والإحساس بالانتعاش.',
 		},
 	},
-] satisfies AdalyaProduct[];
+] satisfies CatalogueProduct[];

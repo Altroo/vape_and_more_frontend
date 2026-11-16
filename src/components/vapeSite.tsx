@@ -15,7 +15,8 @@ import {
 	af15kCopy,
 } from '@/data/rawData';
 import type { Af15kFamily, Af15kFlavour, Brand, Shop, SiteContent, VapeSiteProps } from '@/types/site';
-import { AdalyaCatalogue } from '@/components/adalyaCatalogue';
+import { ProductCatalogue } from '@/components/productCatalogue';
+import { CatalogueOverview } from '@/components/catalogueOverview';
 import { WhatsAppOrderButton } from '@/components/whatsAppOrderButton';
 import { waHref } from '@/utils/whatsapp';
 
@@ -673,7 +674,7 @@ const Footer = ({
 	);
 };
 
-export const VapeSite = ({ siteContent, catalogOnly = false }: VapeSiteProps) => {
+export const VapeSite = ({ siteContent, catalogOnly = false, catalogueBrand }: VapeSiteProps) => {
 	const defaultLang = siteContent.defaultLang || 'fr';
 	const language = useSyncExternalStore(
 		subscribeToPreferences,
@@ -713,7 +714,16 @@ export const VapeSite = ({ siteContent, catalogOnly = false }: VapeSiteProps) =>
 				<Header language={language} t={t} catalogOnly={catalogOnly} onLanguageChange={handleLanguageChange} />
 				<Marquee t={t} />
 				{catalogOnly ? (
-					<AdalyaCatalogue language={language} phone={siteContent.phone} />
+					catalogueBrand ? (
+						<ProductCatalogue
+							key={catalogueBrand}
+							language={language}
+							phone={siteContent.phone}
+							brand={catalogueBrand}
+						/>
+					) : (
+						<CatalogueOverview language={language} />
+					)
 				) : (
 					<>
 						<Hero siteContent={siteContent} t={t} />

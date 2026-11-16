@@ -1,5 +1,6 @@
 import type { LanguageCode } from '@/data/translations';
 import type { af15kFlavours } from '@/data/rawData';
+import type { CatalogueBrand } from '@/types/catalogue';
 
 export type LocalizedText<T> = Record<LanguageCode, T>;
 
@@ -88,6 +89,7 @@ export type SiteContent = {
 export type VapeSiteProps = {
 	siteContent: SiteContent;
 	catalogOnly?: boolean;
+	catalogueBrand?: CatalogueBrand;
 };
 
 export type Af15kFamily = (typeof af15kFlavours)[number]['family'];

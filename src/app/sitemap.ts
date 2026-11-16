@@ -22,6 +22,12 @@ const sitemap = async (): Promise<MetadataRoute.Sitemap> => {
 			changeFrequency: 'weekly',
 			priority: 0.8,
 		},
+		...['/catalogue/adalya', '/catalogue/al-fakher-8k'].map((path) => ({
+			url: toUrl(path),
+			lastModified,
+			changeFrequency: 'weekly' as const,
+			priority: 0.8,
+		})),
 	];
 };
 
