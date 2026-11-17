@@ -4717,7 +4717,12 @@ body[data-page="catalogue"] .catalog-page-section h1{
 }
 
 .catalog-fab.is-over-hero{
-  display:none !important;
+  bottom:6rem;
+}
+
+body.is-rtl .catalog-fab{
+  right:auto;
+  left:clamp(1rem,2.2vw,2rem);
 }
 
 .catalog-fab:hover,
@@ -4756,6 +4761,23 @@ body[data-page="catalogue"] .catalog-fab{
     width:30px;
     height:30px;
     flex-basis:30px;
+  }
+}
+
+@media(max-width:900px){
+  .catalog-fab.is-over-hero{
+    top:150px;
+    bottom:auto;
+    min-height:38px;
+    gap:.5rem;
+    padding:.35rem .75rem;
+    font-size:.65rem;
+  }
+
+  .catalog-fab.is-over-hero .catalog-fab-icon{
+    width:24px;
+    height:24px;
+    flex-basis:24px;
   }
 }
 
