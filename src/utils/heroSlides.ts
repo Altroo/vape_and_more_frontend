@@ -1,7 +1,7 @@
 import { fallbackHeroImages } from '@/data/rawData';
 import type { HeroImage } from '@/types/site';
 
-const discountBanner: HeroImage = {
+export const discountBanner: HeroImage = {
 	key: 'black-friday-discount',
 	image: '/assets/discount-banner.png',
 	alt: '',

@@ -20,7 +20,7 @@ import { CatalogueOverview } from '@/components/catalogueOverview';
 import { BlackFridayCountdown } from '@/components/blackFridayCountdown';
 import { WhatsAppOrderButton } from '@/components/whatsAppOrderButton';
 import { waHref } from '@/utils/whatsapp';
-import { getHeroSlides } from '@/utils/heroSlides';
+import { discountBanner, getHeroSlides } from '@/utils/heroSlides';
 
 type TranslationTree = (typeof translations)[LanguageCode];
 
@@ -246,7 +246,7 @@ const Hero = ({ siteContent, t }: { siteContent: SiteContent; t: TranslationTree
 						fill
 						preload={index === 0}
 						sizes="100vw"
-						className={`hero-photo-slide${index === 0 ? ' is-active' : ''}`}
+						className={`hero-photo-slide${index === 0 ? ' is-active' : ''}${image.key === discountBanner.key ? ' hero-photo-slide--banner' : ''}`}
 						src={heroImageSrc(image.image)}
 						alt={image.alt || ''}
 						key={image.key}
