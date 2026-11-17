@@ -20,7 +20,6 @@ import { CatalogueOverview } from '@/components/catalogueOverview';
 import { BlackFridayCountdown } from '@/components/blackFridayCountdown';
 import { WhatsAppOrderButton } from '@/components/whatsAppOrderButton';
 import { waHref } from '@/utils/whatsapp';
-import { discountBanner, getHeroSlides } from '@/utils/heroSlides';
 import discountStyles from './heroDiscountRibbons.module.css';
 
 type TranslationTree = (typeof translations)[LanguageCode];
@@ -51,12 +50,6 @@ const localized = <T,>(values: Partial<Record<LanguageCode, T>> | undefined, lan
 const imageSrc = (source: string | undefined, fallback = '/assets/logo-vm.png') => {
 	if (!source) return fallback;
 	return imagePathAliases[source] ?? source;
-};
-
-const heroImageSrc = (source: string | undefined) => {
-	if (source === '/assets/photo-01.png') return '/assets/hero-rectif-022.png';
-	if (source === '/assets/photo-03.png') return '/assets/hero-bg-02.png';
-	return imageSrc(source);
 };
 
 const homeAnchor = (id: string, catalogOnly?: boolean) => (catalogOnly ? `/#${id}` : `#${id}`);
@@ -255,30 +248,18 @@ const DiscountRibbons = () => (
 	</div>
 );
 
-const Hero = ({ siteContent, t }: { siteContent: SiteContent; t: TranslationTree }) => {
-	const slides = getHeroSlides(siteContent.heroImages);
-	const slideSeconds = 6;
-	const animationDuration = `${slides.length * slideSeconds}s`;
-
+const Hero = ({ t }: { t: TranslationTree }) => {
 	return (
 		<section className="hero hero-photo" id="accueil">
 			<div className="hero-photo-stage" aria-hidden="true">
-				{slides.map((image, index) => (
-					<Image
-						fill
-						preload={index === 0}
-						sizes="100vw"
-						className={`hero-photo-slide${index === 0 ? ' is-active' : ''}${image.key === discountBanner.key ? ' hero-photo-slide--banner' : ''}`}
-						src={heroImageSrc(image.image)}
-						alt={image.alt || ''}
-						key={image.key}
-						style={{
-							animationName: slides.length === 4 ? 'heroPhotoFadeFour' : 'heroPhotoFade',
-							animationDelay: `${index * slideSeconds}s`,
-							animationDuration,
-						}}
-					/>
-				))}
+				<Image
+					fill
+					preload
+					sizes="100vw"
+					className="hero-photo-slide"
+					src="/assets/discount-banner-background.png"
+					alt=""
+				/>
 			</div>
 			<div className="hero-photo-shade" aria-hidden="true" />
 			<DiscountRibbons />
@@ -769,7 +750,7 @@ export const VapeSite = ({ siteContent, catalogOnly = false, catalogueBrand }: V
 					)
 				) : (
 					<>
-						<Hero siteContent={siteContent} t={t} />
+						<Hero t={t} />
 						<Features siteContent={siteContent} t={t} />
 						<About t={t} />
 						<Brands brands={visibleBrands} language={language} t={t} />

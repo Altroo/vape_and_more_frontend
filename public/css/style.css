@@ -3539,16 +3539,7 @@ body.is-rtl .hero-photo .hero-desc{
   display:block !important;
   object-fit:cover !important;
   object-position:center center;
-  opacity:0;
-  animation:heroPhotoFade 18s infinite;
-}
-
-.hero-photo-slide:nth-child(2){
-  animation-delay:6s;
-}
-
-.hero-photo-slide:nth-child(3){
-  animation-delay:12s;
+  opacity:1;
 }
 
 .hero-photo-shade{
@@ -3588,18 +3579,6 @@ body.is-rtl .hero-photo .hero-desc{
 .hero-photo .hero-cta{
   justify-content:flex-start !important;
   margin-top:2rem !important;
-}
-
-@keyframes heroPhotoFade{
-  0%,27%{opacity:1;transform:scale(1)}
-  33%,94%{opacity:0;transform:scale(1.035)}
-  100%{opacity:1;transform:scale(1)}
-}
-
-@keyframes heroPhotoFadeFour{
-  0%,20%{opacity:1;transform:scale(1)}
-  25%,94%{opacity:0;transform:scale(1.035)}
-  100%{opacity:1;transform:scale(1)}
 }
 
 .about-visual{
@@ -4260,8 +4239,9 @@ body.is-rtl .hero-photo{
 }
 
 #accueil.hero-photo{
+  --discount-ribbon-height:clamp(44px,5.5vw,76px);
   padding-top:clamp(3rem,5vw,4.5rem) !important;
-  padding-bottom:clamp(2rem,4vw,4rem) !important;
+  padding-bottom:calc(var(--discount-ribbon-height) + 1.25rem) !important;
 }
 
 .hero-photo .hero-kicker{
@@ -4461,7 +4441,7 @@ body.is-rtl .hero-aurora-button::after{
   }
   #accueil.hero-photo{
     padding-top:3.5rem !important;
-    padding-bottom:4rem !important;
+    padding-bottom:calc(var(--discount-ribbon-height) + 1.25rem) !important;
   }
   .hero-aurora-button{
     width:100%;
@@ -4481,15 +4461,12 @@ body.is-rtl .hero-aurora-button::after{
   .hero-aurora-button::after{
     flex-shrink:0;
   }
-  .catalog-fab.is-over-hero{
-    display:none !important;
-  }
 }
 
 @media(min-width:901px) and (max-height:860px){
   #accueil.hero-photo{
     padding-top:clamp(2rem,7vh,3.5rem) !important;
-    padding-bottom:1.5rem !important;
+    padding-bottom:calc(var(--discount-ribbon-height) + 1.25rem) !important;
   }
   .hero-photo .hero-kicker{
     margin-bottom:clamp(1rem,3.5vh,1.75rem) !important;
@@ -4725,6 +4702,10 @@ body[data-page="catalogue"] .catalog-page-section h1{
   font-weight:800;
   letter-spacing:.08em;
   transition:transform .22s ease,background .22s ease,box-shadow .22s ease;
+}
+
+.catalog-fab.is-over-hero{
+  display:none !important;
 }
 
 .catalog-fab:hover,

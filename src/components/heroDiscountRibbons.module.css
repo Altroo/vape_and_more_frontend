@@ -2,7 +2,6 @@
 	position: absolute;
 	inset: 0;
 	z-index: 2;
-	max-height: calc(100svh - 130px);
 	overflow: hidden;
 	pointer-events: none;
 }
@@ -12,7 +11,7 @@
 	display: flex;
 	align-items: center;
 	overflow: hidden;
-	height: clamp(44px, 5.5vw, 76px);
+	height: var(--discount-ribbon-height, clamp(44px, 5.5vw, 76px));
 	background: #bf0426;
 	color: #fff;
 	direction: ltr;
@@ -29,7 +28,7 @@
 .bottom {
 	right: 0;
 	bottom: 0;
-	left: 50%;
+	left: 0;
 }
 
 .track {
@@ -78,11 +77,6 @@
 	transform: rotate(-28deg);
 }
 
-:global(body.is-rtl) .bottom {
-	right: 50%;
-	left: 0;
-}
-
 @keyframes scroll {
 	to {
 		transform: translateX(-50%);
@@ -90,10 +84,6 @@
 }
 
 @media (max-width: 900px) {
-	.layer {
-		max-height: none;
-	}
-
 	.top,
 	:global(body.is-rtl) .top {
 		top: 0;
@@ -101,12 +91,6 @@
 		left: 0;
 		width: 100%;
 		transform: none;
-	}
-
-	.bottom,
-	:global(body.is-rtl) .bottom {
-		right: 0;
-		left: 0;
 	}
 }
 
