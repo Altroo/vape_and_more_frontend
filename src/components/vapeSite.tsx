@@ -9,7 +9,6 @@ import {
 	langStorageKey,
 	preferencesEvent,
 	instagramUrl,
-	fallbackHeroImages,
 	footerCopy,
 	imagePathAliases,
 	af15kFlavours,
@@ -21,6 +20,7 @@ import { CatalogueOverview } from '@/components/catalogueOverview';
 import { BlackFridayCountdown } from '@/components/blackFridayCountdown';
 import { WhatsAppOrderButton } from '@/components/whatsAppOrderButton';
 import { waHref } from '@/utils/whatsapp';
+import { getHeroSlides } from '@/utils/heroSlides';
 
 type TranslationTree = (typeof translations)[LanguageCode];
 
@@ -234,7 +234,7 @@ const Marquee = ({ t }: { t: TranslationTree }) => (
 );
 
 const Hero = ({ siteContent, t }: { siteContent: SiteContent; t: TranslationTree }) => {
-	const slides = siteContent.heroImages.length > 0 ? siteContent.heroImages : fallbackHeroImages;
+	const slides = getHeroSlides(siteContent.heroImages);
 	const slideSeconds = 6;
 	const animationDuration = `${slides.length * slideSeconds}s`;
 
@@ -251,6 +251,7 @@ const Hero = ({ siteContent, t }: { siteContent: SiteContent; t: TranslationTree
 						alt={image.alt || ''}
 						key={image.key}
 						style={{
+							animationName: slides.length === 4 ? 'heroPhotoFadeFour' : 'heroPhotoFade',
 							animationDelay: `${index * slideSeconds}s`,
 							animationDuration,
 						}}

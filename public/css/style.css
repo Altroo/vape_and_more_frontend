@@ -3596,6 +3596,12 @@ body.is-rtl .hero-photo .hero-desc{
   100%{opacity:1;transform:scale(1)}
 }
 
+@keyframes heroPhotoFadeFour{
+  0%,20%{opacity:1;transform:scale(1)}
+  25%,94%{opacity:0;transform:scale(1.035)}
+  100%{opacity:1;transform:scale(1)}
+}
+
 .about-visual{
   overflow:hidden;
   border-radius:18px;
