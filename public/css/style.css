@@ -4239,7 +4239,7 @@ body.is-rtl .hero-photo{
 }
 
 #accueil.hero-photo{
-  --discount-ribbon-height:clamp(44px,5.5vw,76px);
+  --discount-ribbon-height:clamp(32px,3.8vw,52px);
   padding-top:clamp(3rem,5vw,4.5rem) !important;
   padding-bottom:calc(var(--discount-ribbon-height) + 1.25rem) !important;
 }
