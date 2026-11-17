@@ -4259,14 +4259,6 @@ body.is-rtl .hero-photo{
   object-position:34% center !important;
 }
 
-/* Keep the full banner below the navbar and ticker, including during fades. */
-.hero-photo .hero-photo-slide--banner{
-  object-fit:contain !important;
-  object-position:right center !important;
-  max-height:calc(100svh - 130px);
-  transform:none !important;
-}
-
 #accueil.hero-photo{
   padding-top:clamp(3rem,5vw,4.5rem) !important;
   padding-bottom:clamp(2rem,4vw,4rem) !important;
@@ -4463,16 +4455,34 @@ body.is-rtl .hero-aurora-button::after{
     margin-bottom:clamp(1.5rem,5vw,2rem) !important;
     font-size:.76rem !important;
   }
+  .hero-photo .hero-copy{
+    width:100%;
+    max-width:100% !important;
+  }
   #accueil.hero-photo{
     padding-top:3.5rem !important;
-    padding-bottom:2rem !important;
-  }
-  .hero-photo .hero-photo-slide--banner{
-    object-position:center bottom !important;
+    padding-bottom:4rem !important;
   }
   .hero-aurora-button{
     width:100%;
     min-width:0;
+    gap:.75rem;
+    padding-inline:1rem;
+    font-size:.8rem;
+    line-height:1.35;
+    letter-spacing:.04em;
+  }
+  .hero-aurora-button > span{
+    flex:1;
+    min-width:0;
+    white-space:normal;
+    text-wrap:balance;
+  }
+  .hero-aurora-button::after{
+    flex-shrink:0;
+  }
+  .catalog-fab.is-over-hero{
+    display:none !important;
   }
 }
 

@@ -14,7 +14,7 @@ test('the discount banner follows the configured carousel without changing its e
 	const slides = getHeroSlides(configured);
 	assert.deepEqual(slides.slice(0, 3), configured);
 	assert.equal(slides.length, 4);
-	assert.equal(slides[3].image, '/assets/discount-banner.png');
+	assert.equal(slides[3].image, '/assets/discount-banner-background.png');
 	assert.equal(configured.length, 3);
 });
 

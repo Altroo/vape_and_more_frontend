@@ -1,0 +1,117 @@
+.layer {
+	position: absolute;
+	inset: 0;
+	z-index: 2;
+	max-height: calc(100svh - 130px);
+	overflow: hidden;
+	pointer-events: none;
+}
+
+.ribbon {
+	position: absolute;
+	display: flex;
+	align-items: center;
+	overflow: hidden;
+	height: clamp(44px, 5.5vw, 76px);
+	background: #bf0426;
+	color: #fff;
+	direction: ltr;
+}
+
+.top {
+	top: 24px;
+	right: -96px;
+	width: clamp(360px, 46vw, 760px);
+	transform: rotate(28deg);
+	transform-origin: 75% 50%;
+}
+
+.bottom {
+	right: 0;
+	bottom: 0;
+	left: 50%;
+}
+
+.track {
+	display: flex;
+	flex-shrink: 0;
+	width: max-content;
+	animation: scroll 28s linear infinite;
+	will-change: transform;
+}
+
+.top .track {
+	animation-direction: reverse;
+	animation-duration: 22s;
+}
+
+.group {
+	display: flex;
+	flex-shrink: 0;
+	align-items: center;
+	justify-content: space-around;
+	gap: 24px;
+	min-width: calc(100vw + 128px);
+	padding-inline: 12px;
+}
+
+.copy {
+	display: grid;
+	flex-shrink: 0;
+	gap: 1px;
+	min-width: clamp(175px, 20vw, 300px);
+	font-size: clamp(18px, 1.8vw, 30px);
+	font-weight: 800;
+	line-height: 0.95;
+	text-align: center;
+	white-space: nowrap;
+}
+
+.copy strong {
+	font-size: 1.15em;
+	font-weight: inherit;
+}
+
+:global(body.is-rtl) .top {
+	right: auto;
+	left: -96px;
+	transform: rotate(-28deg);
+}
+
+:global(body.is-rtl) .bottom {
+	right: 50%;
+	left: 0;
+}
+
+@keyframes scroll {
+	to {
+		transform: translateX(-50%);
+	}
+}
+
+@media (max-width: 900px) {
+	.layer {
+		max-height: none;
+	}
+
+	.top,
+	:global(body.is-rtl) .top {
+		top: 0;
+		right: 0;
+		left: 0;
+		width: 100%;
+		transform: none;
+	}
+
+	.bottom,
+	:global(body.is-rtl) .bottom {
+		right: 0;
+		left: 0;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.track {
+		animation: none;
+	}
+}

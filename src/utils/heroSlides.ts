@@ -3,7 +3,7 @@ import type { HeroImage } from '@/types/site';
 
 export const discountBanner: HeroImage = {
 	key: 'black-friday-discount',
-	image: '/assets/discount-banner.png',
+	image: '/assets/discount-banner-background.png',
 	alt: '',
 	sort_order: 4,
 };
