@@ -4238,6 +4238,15 @@ body.is-rtl .hero-photo{
   object-position:34% center !important;
 }
 
+body.is-rtl .hero-photo-stage{
+  right:50%;
+  mask-image:linear-gradient(to right,#000 85%,transparent);
+}
+
+body.is-rtl .hero-photo .hero-photo-slide{
+  object-position:right center !important;
+}
+
 #accueil.hero-photo{
   --discount-ribbon-height:clamp(32px,3.8vw,52px);
   padding-top:clamp(3rem,5vw,4.5rem) !important;
@@ -4438,6 +4447,9 @@ body.is-rtl .hero-aurora-button::after{
   .hero-photo .hero-copy{
     width:100%;
     max-width:100% !important;
+  }
+  body.is-rtl .hero-photo-stage{
+    right:0;
   }
   #accueil.hero-photo{
     padding-top:3.5rem !important;
